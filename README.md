@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://github.com/Viktormes/picturedeluxe/blob/main/viktorstalin2.jpg" height="130" alt="WFWS">
+    <img src="https://github.com/Viktormes/picturedeluxe/blob/main/viktorstalin2.jpg" height="130">
 </h1>
 
 <section>
@@ -27,4 +27,8 @@
 
 
 # worldfirstwebshop
-This is a group project for our Java Enterprise Class where we create the worlds first webbshop using SpringBoot 
+This Spring Boot shop project is simply amazing! It's lightning-fast, incredibly secure, 
+highly scalable, and super easy to use. 
+You won't find a better shop project anywhere else. 
+It's time to revolutionize the way you do business. 
+Start using this incredible Spring Boot shop project today and take your online store to new heights!
