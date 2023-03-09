@@ -1,4 +1,4 @@
-<img src='https://github.com/Viktormes/picturedeluxe/blob/main/viktorstalin2.jpg'/>
+<img src='https://imgur.com/a/A7GIohX'/>
 
 
 
