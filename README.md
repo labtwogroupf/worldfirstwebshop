@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://imgur.com/a/A7GIohX" height="130" alt="WFWS">
+    <img src="https://github.com/Viktormes/picturedeluxe/blob/main/viktorstalin2.jpg" height="130" alt="WFWS">
 </h1>
 
 
