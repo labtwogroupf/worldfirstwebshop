@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: demo
+    username: admin
+    password: developer
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
