@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://github.com/Viktormes/picturedeluxe/blob/main/viktorstalin2.jpg" height="130">
+    <img src="https://www.iths.se/wp-content/uploads/2016/02/thumbnails/ithslogoliggandepayoffrgb-4601-1280x450.png" height="130" alt="ITHS">
 </h1>
 
 <section>
