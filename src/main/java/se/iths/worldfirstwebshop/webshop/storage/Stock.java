@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 
 public interface Stock {
-
     void add(Product product);
 
     void remove(Product product);
@@ -19,6 +18,7 @@ public interface Stock {
     BigDecimal totalPrice();
 
     void clear();
+
 
 
 
