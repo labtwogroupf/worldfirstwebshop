@@ -45,4 +45,8 @@ public class Inventory implements Stock {
 
         inventory.forEach(this::remove);
     }
+
+    public Product getProduct(int i){
+        return inventory.get(i);
+    }
 }
