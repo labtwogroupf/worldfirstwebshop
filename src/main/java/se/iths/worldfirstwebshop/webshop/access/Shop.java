@@ -19,13 +19,18 @@ public class Shop {
         var p = inventory.getProduct(product);
         if(p != null) {
             int numberInStock = p.getNumberInStock();
-            if (numberInStock <= amount) {
+            if (numberInStock >= amount) {
                 var newProduct = new Product(p.getName(), p.getPrice(), p.getNumberInStock()-amount);
                 this.cart.add(newProduct);
             }
         }
     }
 
+    public Cart getCart() {
+        return cart;
+    }
 
-
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

@@ -57,4 +57,7 @@ public class Cart implements Stock {
     public int getSize(){
         return products.size();
     }
+    public List<Product> getCart(){
+        return products;
+    }
 }
