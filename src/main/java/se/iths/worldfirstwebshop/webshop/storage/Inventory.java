@@ -24,7 +24,8 @@ public class Inventory implements Stock {
     @Override
     public void remove(Long id) {
         //add remove by id later, now removes index
-        inventory.remove(id);
+        int index = Math.toIntExact(id);
+        inventory.remove(index);
     }
 
     @Override
@@ -34,19 +35,22 @@ public class Inventory implements Stock {
 
     @Override
     public BigDecimal totalPrice() {
-        BigDecimal sum = null;
-        for (Product product : inventory) sum = product.getPrice();
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Product product : inventory) sum = sum.add(product.getPrice());
         return sum;
     }
 
 
     @Override
     public void clear() {
-
-        inventory.forEach(this::remove);
+        inventory.clear();
     }
 
     public Product getProduct(int i){
         return inventory.get(i);
+    }
+
+    public int size(){
+        return inventory.size();
     }
 }
