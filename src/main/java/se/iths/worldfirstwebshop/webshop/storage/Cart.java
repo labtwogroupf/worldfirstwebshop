@@ -65,13 +65,6 @@ public class Cart implements Stock {
         return products.contains(product);
     }
 
-    public void replace(Product product, int amount) {
-        for (int i = 0; i < products.size(); i++) {
-            if(products.get(i).equals(product))
-                products.get(i).setNumberInStock(products.get(i).getNumberInStock() - amount);
-
-        }
-    }
 
     public void decreaseAmount(Product product){
         returnProduct(product).decreaseAmount();

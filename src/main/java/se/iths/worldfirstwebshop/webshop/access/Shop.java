@@ -31,18 +31,11 @@ public class Shop {
         }
     }
 
-    private void fromInventoryToCart(int amount, Product p) {
-        for (int i = 0; i < amount; i++) {
-            this.inventory.decreaseAmount(p);
-            this.cart.increaseAmount(p);
-        }
-    }
-
     public void removeFromCart(Product product, int amount) {
         if (this.cart.contains(product)) {
             for (int i = 0; i < amount; i++)
                 this.cart.decreaseAmount(product);
-
+                //transfer back to inventory
         }
     }
 
@@ -53,4 +46,7 @@ public class Shop {
     public Inventory getInventory() {
         return inventory;
     }
+
+
+
 }

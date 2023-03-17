@@ -18,25 +18,16 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 
     public int getNumberInStock() {
         return numberInStock;
     }
 
-    public void setNumberInStock(int numberInStock) {
-        this.numberInStock = numberInStock;
-    }
 
     public void increaseAmount(){
         numberInStock++;
