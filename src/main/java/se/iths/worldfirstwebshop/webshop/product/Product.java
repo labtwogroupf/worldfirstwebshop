@@ -8,6 +8,12 @@ public class Product {
     private BigDecimal price;
     private int numberInStock;
 
+    public Product(String name, BigDecimal price, int numberInStock) {
+        this.name = name;
+        this.price = price;
+        this.numberInStock = numberInStock;
+    }
+
     public String getName() {
         return name;
     }
