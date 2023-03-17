@@ -39,17 +39,44 @@ public class Inventory implements Stock {
         return sum;
     }
 
-
     @Override
     public void clear() {
         inventory.clear();
     }
 
-    public Product getProduct(int i){
+    public Product getProduct(int i) {
         return inventory.get(i);
     }
 
-    public int size(){
+    public Product getProduct(Product product) {
+
+        for (Product value : inventory) {
+            if (value.equals(product)) {
+                return value;
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public int size() {
+
         return inventory.size();
+    }
+    public void decreaseAmount(Product product){
+        returnProduct(product).decreaseAmount();
+    }
+    public void increaseAmount(Product product){
+        returnProduct(product).increaseAmount();
+    }
+
+    public Product returnProduct(Product product){
+        for (Product value : inventory)
+            if (value.equals(product))
+                return value;
+
+        return null;
     }
 }

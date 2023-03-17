@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Cart implements Stock {
 
+    private final List<Product> products;
 
-    public Cart(List<Product> products) {
-        this.products = products;
+    public Cart() {
+        this.products = new ArrayList<>();
     }
 
-    List<Product> products = new ArrayList<>();
 
     @Override
     public void add(Product product){
@@ -53,4 +53,32 @@ public class Cart implements Stock {
         products.remove(Math.toIntExact(id));
 
     }
+
+    public int getSize(){
+        return products.size();
+    }
+    public List<Product> getCart(){
+        return products;
+    }
+
+    public boolean contains(Product product) {
+        return products.contains(product);
+    }
+
+
+    public void decreaseAmount(Product product){
+        returnProduct(product).decreaseAmount();
+    }
+    public void increaseAmount(Product product){
+        returnProduct(product).increaseAmount();
+    }
+
+    public Product returnProduct(Product product){
+        for (Product value : products)
+            if (value.equals(product))
+                return value;
+
+        return null;
+    }
+
 }
