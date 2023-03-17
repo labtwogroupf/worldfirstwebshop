@@ -37,4 +37,12 @@ public class Product {
     public void setNumberInStock(int numberInStock) {
         this.numberInStock = numberInStock;
     }
+
+    public void increaseAmount(){
+        numberInStock++;
+    }
+
+    public void decreaseAmount(){
+        numberInStock--;
+    }
 }

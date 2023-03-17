@@ -19,10 +19,25 @@ class ShopTest {
         shop.getInventory().add(product);
 
         shop.addToCart(product, 3);
-        var list = shop.getCart().getCart();
-        var leftInStock = shop.getCart().getCart().get(0).getNumberInStock();
+        var leftInStock = shop.getInventory().getProduct(0).getNumberInStock();
 
         assertThat(leftInStock).isEqualTo(2);
+    }
+
+    @Test
+    void remove2FromStockRemovesCorrectAmountAndReturns1(){
+        var product = new Product("test", BigDecimal.ONE, 5);
+        shop.getInventory().add(product);
+
+        shop.addToCart(product, 3);
+        shop.removeFromCart(shop.getCart().getCart().get(0), 2);
+
+        var leftInStock = shop.getCart().getCart().get(0).getNumberInStock();
+
+        assertThat(leftInStock).isEqualTo(1);
+
+
+
     }
 
 }

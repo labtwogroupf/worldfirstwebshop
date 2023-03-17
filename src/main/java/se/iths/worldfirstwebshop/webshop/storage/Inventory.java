@@ -65,4 +65,18 @@ public class Inventory implements Stock {
 
         return inventory.size();
     }
+    public void decreaseAmount(Product product){
+        returnProduct(product).decreaseAmount();
+    }
+    public void increaseAmount(Product product){
+        returnProduct(product).increaseAmount();
+    }
+
+    public Product returnProduct(Product product){
+        for (Product value : inventory)
+            if (value.equals(product))
+                return value;
+
+        return null;
+    }
 }

@@ -9,20 +9,40 @@ public class Shop {
     private final Cart cart;
     private final Inventory inventory;
 
-
-    public Shop(){
+    public Shop() {
         this.cart = new Cart();
         this.inventory = new Inventory();
     }
 
-    public void addToCart(Product product, int amount){
+    public void addToCart(Product product, int amount) {
         var p = inventory.getProduct(product);
-        if(p != null) {
+        if (p != null) {
             int numberInStock = p.getNumberInStock();
             if (numberInStock >= amount) {
-                var newProduct = new Product(p.getName(), p.getPrice(), p.getNumberInStock()-amount);
+                var newProduct = new Product(p.getName(), p.getPrice(), 0);
                 this.cart.add(newProduct);
+
+                for (int i = 0; i < amount; i++) {
+                    this.inventory.decreaseAmount(p);
+                    this.cart.increaseAmount(newProduct);
+                }
+
             }
+        }
+    }
+
+    private void fromInventoryToCart(int amount, Product p) {
+        for (int i = 0; i < amount; i++) {
+            this.inventory.decreaseAmount(p);
+            this.cart.increaseAmount(p);
+        }
+    }
+
+    public void removeFromCart(Product product, int amount) {
+        if (this.cart.contains(product)) {
+            for (int i = 0; i < amount; i++)
+                this.cart.decreaseAmount(product);
+
         }
     }
 
