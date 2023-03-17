@@ -50,7 +50,7 @@ public class Cart implements Stock {
     public void remove(Long id){
 
         //Add later when we got id
-        products.remove(id);
+        products.remove(Math.toIntExact(id));
 
     }
 }
