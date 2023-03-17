@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Cart implements Stock {
 
+    private final List<Product> products;
 
-    public Cart(List<Product> products) {
-        this.products = products;
+    public Cart() {
+        this.products = new ArrayList<>();
     }
 
-    List<Product> products = new ArrayList<>();
 
     @Override
     public void add(Product product){
@@ -52,5 +52,9 @@ public class Cart implements Stock {
         //Add later when we got id
         products.remove(Math.toIntExact(id));
 
+    }
+
+    public int getSize(){
+        return products.size();
     }
 }

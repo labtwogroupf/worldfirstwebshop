@@ -11,29 +11,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CartTest {
 
-    List<Product> products = new ArrayList<>();
-    Cart cart = new Cart(products);
+    Cart products = new Cart();
 
     @Test
     void totalPriceShouldReturn100() {
-        cart.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2));
-        cart.add(new Product("Citron", BigDecimal.valueOf(30), 1));
-        cart.add(new Product("Vanilj", BigDecimal.valueOf(10), 3));
+        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2));
+        products.add(new Product("Citron", BigDecimal.valueOf(30), 1));
+        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3));
         BigDecimal expected = BigDecimal.valueOf(100);
 
-        assertEquals(expected, cart.totalPrice());
+        assertEquals(expected, products.totalPrice());
 
     }
 
     @Test
     void should() {
-        cart.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2));
-        cart.clear();
-        cart.add(new Product("Citron", BigDecimal.valueOf(30), 1));
-        cart.add(new Product("Vanilj", BigDecimal.valueOf(10), 3));
+        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2));
+        products.clear();
+        products.add(new Product("Citron", BigDecimal.valueOf(30), 1));
+        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3));
         int expected = 2;
 
-        assertEquals(expected, cart.products.size());
+        assertEquals(expected, products.getSize());
 
 
 
