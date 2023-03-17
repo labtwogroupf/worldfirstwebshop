@@ -24,8 +24,7 @@ public class Inventory implements Stock {
     @Override
     public void remove(Long id) {
         //add remove by id later, now removes index
-        int index = Math.toIntExact(id);
-        inventory.remove(index);
+        inventory.remove(Math.toIntExact(id));
     }
 
     @Override
