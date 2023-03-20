@@ -1,4 +1,5 @@
 package se.iths.worldfirstwebshop.webshop.access;
+
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.storage.Cart;
 import se.iths.worldfirstwebshop.webshop.storage.Inventory;
@@ -8,14 +9,14 @@ public class Shop {
     private final Cart cart;
     private final Inventory inventory;
 
-
     public Shop() {
         this.cart = new Cart();
         this.inventory = new Inventory();
     }
 
 
-        public void addToCart(Product product, int amount) {
+
+    public void addToCart(Product product, int amount) {
 
         var inventoryProduct = inventory.getProduct(product);
         var cartProduct = cart.getProduct(product);
@@ -23,7 +24,7 @@ public class Shop {
 
         if (cartProduct == null) {
             cartProduct = new Product(inventoryProduct.getName(),
-                    inventoryProduct.getPrice(), 0,inventoryProduct.getIsbn());
+                    inventoryProduct.getPrice(), 0, inventoryProduct.getIsbn());
             cart.add(cartProduct);
         }
 
@@ -41,7 +42,7 @@ public class Shop {
         inventoryProduct.setAmountInStock(inventoryProduct.getAmountInStock() + maxPossibleAmount);
         cartProduct.setAmountInStock(cartProduct.getAmountInStock() - maxPossibleAmount);
 
-        if(cartProduct.getAmountInStock() == 0)
+        if (cartProduct.getAmountInStock() == 0)
             cart.remove(cartProduct);
 
     }
