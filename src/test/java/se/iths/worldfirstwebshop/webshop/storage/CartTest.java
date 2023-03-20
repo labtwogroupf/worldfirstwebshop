@@ -18,7 +18,7 @@ class CartTest {
         products.add(product, 3);
         products.add(product, 3);
 
-        assertThat(products.getNumberInCart(product)).isEqualTo(6);
+        assertThat(products.getAmountInCart(product)).isEqualTo(6);
 
     }
 
@@ -29,9 +29,18 @@ class CartTest {
 
         products.add(product, 3);
 
-        assertThat(products.getNumberInCart(product)).isEqualTo(3);
+        assertThat(products.getAmountInCart(product)).isEqualTo(3);
 
     }
 
+    @Test
+    void removingMoreThanIsInCartRemovesProduct() {
+
+        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
+        products.add(product, 5);
+        products.remove(product, 10);
+
+        assertThat(products.getProducts().containsKey(product)).isFalse();
+    }
 
 }

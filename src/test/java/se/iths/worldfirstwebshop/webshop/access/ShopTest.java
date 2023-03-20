@@ -28,9 +28,10 @@ class ShopTest {
         shop.getInventory().add(product);
 
         shop.addToCart(product, 3);
-        shop.removeFromCart(shop.getCart().getCart().get(0), 2);
+        cart.remove(product, 2);
 
-        var leftInStock = shop.getCart().getCart().get(0).getAmountInStock();
+        var leftInStock = cart.getAmountInCart(product);
+
 
         assertThat(leftInStock).isEqualTo(1);
 
@@ -52,7 +53,7 @@ class ShopTest {
  */
 
 
-    }
+
     @Test
     void remove4thanRemove2ShouldReturn3(){
 /*
@@ -64,7 +65,6 @@ class ShopTest {
 
         assertThat(leftInInventory).isEqualTo(3);
 
- */
-
     }
+
 }

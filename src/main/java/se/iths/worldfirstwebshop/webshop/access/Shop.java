@@ -26,40 +26,17 @@ public class Shop {
             return false;
 
         var inventoryStock = inventory.getNrOfProductsInStock(product);
-        var cartStock = cart.getNumberInCart(product);  //3
+        var cartStock = cart.getAmountInCart(product);  //3
 
         return amount <= inventoryStock - cartStock;  // 2 <= 5 - 3 == 2
     }
-/*
-    public void addToCart(Product product, int amount) {
 
-        var inventoryProduct = inventory.getProduct(product);
-        var cartProduct = cart.getProduct(product);
-        int maxPossibleAmount = Math.min(amount, inventoryProduct.getAmountInStock());
-
-        if (cartProduct == null) {
-            cartProduct = new Product(inventoryProduct.getName(),
-                    inventoryProduct.getPrice(), 0, inventoryProduct.getIsbn());
-            cart.add(cartProduct);
-        }
-
-        cartProduct.setAmountInStock(cartProduct.getAmountInStock() + maxPossibleAmount);
-        inventoryProduct.setAmountInStock(inventoryProduct.getAmountInStock() - maxPossibleAmount);
-
-    }
-
-    public void removeFromCart(Product product, int amount) {
-
-        var cartProduct = cart.getProduct(product);
-        var inventoryProduct = inventory.getProduct(product);
-        int maxPossibleAmount = Math.min(amount, cartProduct.getAmountInStock());
-
-        inventoryProduct.setAmountInStock(inventoryProduct.getAmountInStock() + maxPossibleAmount);
-        cartProduct.setAmountInStock(cartProduct.getAmountInStock() - maxPossibleAmount);
-
-        if (cartProduct.getAmountInStock() == 0)
-            cart.remove(cartProduct);
-
+    public void checkout() {
+        cart.getProducts()
+                .keySet()
+                .stream()
+                .forEach(this::removeBoughtItemsFromInventory);
+        cart.clear();
     }
 
     public Cart getCart() {
@@ -70,5 +47,7 @@ public class Shop {
         return inventory;
     }
 
- */
+    private void removeBoughtItemsFromInventory(Product product) {
+        inventory.remove(product, cart.getAmountInCart(product));
+    }
 }
