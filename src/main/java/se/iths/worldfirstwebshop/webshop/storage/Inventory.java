@@ -20,17 +20,6 @@ public class Inventory{
         inventory.put(product, amount);
     }
 
-    public void remove(Product product) {
-        inventory.remove(product);
-
-    }
-
-    public void remove(Long id) {
-        //add remove by id later, now removes index
-        inventory.remove(Math.toIntExact(id));
-    }
-
-
     public void clear() {
         inventory.clear();
     }
@@ -39,22 +28,14 @@ public class Inventory{
         return inventory.get(product);
     }
 
-    public Product getProduct(Product product) {
-        
-
-        return inventory.stream()
-                .filter(p -> p.getIsbn().equals(product.getIsbn()))
-                .findFirst()
-                .orElse(null);
-    }
-
-
     public int size() {
 
         return inventory.size();
     }
 
 
-
+    public boolean contains(Product product){
+        return inventory.keySet().stream().anyMatch(product1 -> product1.matchingIsbn(product.getIsbn()));
+    }
 
 }

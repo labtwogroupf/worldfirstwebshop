@@ -14,8 +14,23 @@ public class Shop {
         this.inventory = new Inventory();
     }
 
+    public void addToCart(Product product, int amount) {
+        if (checkIfInStock(product, amount))
+            cart.add(product, amount);
 
+    }
 
+    private boolean checkIfInStock(Product product, int amount) {
+
+        if (!inventory.contains(product))
+            return false;
+
+        var inventoryStock = inventory.getNrOfProductsInStock(product);
+        var cartStock = cart.getNumberInCart(product);  //3
+
+        return amount <= inventoryStock - cartStock;  // 2 <= 5 - 3 == 2
+    }
+/*
     public void addToCart(Product product, int amount) {
 
         var inventoryProduct = inventory.getProduct(product);
@@ -54,4 +69,6 @@ public class Shop {
     public Inventory getInventory() {
         return inventory;
     }
+
+ */
 }
