@@ -4,18 +4,20 @@ import se.iths.worldfirstwebshop.webshop.product.Product;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Inventory{
 
-    private final List<Product> inventory = new ArrayList<>();
+    private final Map<Product, Integer> inventory = new HashMap<>();
 
-    public List<Product> getInventory() {
+    public Map<Product, Integer> getInventory() {
         return inventory;
     }
 
-    public void add(Product product) {
-        inventory.add(product);
+    public void add(Product product, int amount) {
+        inventory.put(product, amount);
     }
 
     public void remove(Product product) {
@@ -29,27 +31,17 @@ public class Inventory{
     }
 
 
-    public void print() {
-        inventory.forEach(product -> System.out.println(product.getName()));
-    }
-
-
-    public BigDecimal totalPrice() {
-        BigDecimal sum = BigDecimal.ZERO;
-        for (Product product : inventory) sum = sum.add(product.getPrice());
-        return sum;
-    }
-
-
     public void clear() {
         inventory.clear();
     }
 
-    public Product getProduct(int i) {
-        return inventory.get(i);
+    public int getNrOfProductsInStock(Product product) {
+        return inventory.get(product);
     }
 
     public Product getProduct(Product product) {
+
+
         return inventory.stream()
                 .filter(p -> p.getIsbn().equals(product.getIsbn()))
                 .findFirst()
