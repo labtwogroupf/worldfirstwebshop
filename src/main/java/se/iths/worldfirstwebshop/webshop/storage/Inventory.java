@@ -2,67 +2,39 @@ package se.iths.worldfirstwebshop.webshop.storage;
 
 import se.iths.worldfirstwebshop.webshop.product.Product;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Inventory{
 
-    private final List<Product> inventory = new ArrayList<>();
-
-    public List<Product> getInventory() {
-        return inventory;
-    }
-
-    public void add(Product product) {
-        inventory.add(product);
-    }
-
-    public void remove(Product product) {
-        inventory.remove(product);
-
-    }
-
-    public void remove(Long id) {
-        //add remove by id later, now removes index
-        inventory.remove(Math.toIntExact(id));
-    }
+    private final Map<Product, Integer> inventory = new HashMap<>();
 
 
-    public void print() {
-        inventory.forEach(product -> System.out.println(product.getName()));
-    }
-
-
-    public BigDecimal totalPrice() {
-        BigDecimal sum = BigDecimal.ZERO;
-        for (Product product : inventory) sum = sum.add(product.getPrice());
-        return sum;
-    }
-
-
-    public void clear() {
-        inventory.clear();
-    }
-
-    public Product getProduct(int i) {
-        return inventory.get(i);
-    }
-
-    public Product getProduct(Product product) {
-        return inventory.stream()
-                .filter(p -> p.getIsbn().equals(product.getIsbn()))
-                .findFirst()
-                .orElse(null);
-    }
-
-
-    public int size() {
-
-        return inventory.size();
+    public void add(Product product, int amount) {
+        inventory.put(product, amount);
     }
 
 
 
+    public int getNrOfProductsInStock(Product product) {
+        return inventory.get(product);
+    }
+
+
+    public boolean contains(Product product){
+        return inventory.keySet().stream().anyMatch(product1 -> product1.matchingIsbn(product.getIsbn()));
+    }
+
+    public void remove(Product product, int amount) {
+        if (!this.inventory.containsKey(product))
+            return;
+
+        removeAmountFromInventory(product, amount);
+    }
+
+    private void removeAmountFromInventory(Product product, int amount) {
+        int currentAmount = this.inventory.get(product);
+        this.inventory.put(product, currentAmount - amount);
+    }
 
 }

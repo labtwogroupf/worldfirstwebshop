@@ -2,62 +2,56 @@ package se.iths.worldfirstwebshop.webshop.storage;
 
 import se.iths.worldfirstwebshop.webshop.product.Product;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
+public class Cart {
 
-public class Cart{
+    private final Map<Product, Integer> products;
 
-    private final List<Product> products = new ArrayList<>();
-
-    public void add(Product product){
-        products.add(product);
-
+    public Cart() {
+        this.products = new HashMap<>();
     }
 
-    public void print(){
-        products.forEach(System.out::println);
-    }
-
-
-    public BigDecimal totalPrice(){
-        return products.stream()
-                .map(p -> p.getPrice().multiply(BigDecimal.valueOf(p.getAmountInStock())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-
-    public void clear(){
-        products.clear();
-    }
-
-
-    public void remove(Product product) {
-        products.remove(product);
-    }
-
-
-    public void remove(Long id){
-
-        //Add later when we got id
-        products.remove(Math.toIntExact(id));
-
-    }
-
-    public int getSize(){
-        return products.size();
-    }
-
-    public List<Product> getCart(){
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 
-
-    public Product getProduct(Product product) {
-        return products.stream()
-                .filter(p -> p.getIsbn().equals(product.getIsbn()))
-                .findFirst()
-                .orElse(null);
+    public void add(Product product, int amount) {
+        if (products.containsKey(product)) {
+            int amountInStock = products.get(product);
+            products.put(product, amount + amountInStock);
+        } else {
+            products.put(product, amount);
+        }
     }
+
+    public int getAmountInCart(Product product) {
+        return Objects.requireNonNullElse(products.get(product), 0);
+    }
+
+    public void clear() {
+        products.clear();
+    }
+
+    public void remove(Product product, int amount) {
+        if (!this.products.containsKey(product))
+            return;
+
+        if (products.get(product) < amount)
+            removeFromCart(product);
+        else
+            removeAmountFromCart(product, amount);
+    }
+
+    private void removeFromCart(Product product) {
+        products.remove(product);
+    }
+
+    private void removeAmountFromCart(Product product, int amount) {
+        int currentAmount = this.products.get(product);
+        this.products.put(product, currentAmount - amount);
+    }
+
 }

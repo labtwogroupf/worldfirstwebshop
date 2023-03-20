@@ -13,64 +13,29 @@ class InventoryTest {
 
     @Test
     void addProductToInventoryAddsProduct() {
-        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
 
-        inventory.add(testProduct);
+        var testProduct = new Product("test", BigDecimal.ONE, "100");
+        inventory.add(testProduct, 1);
 
-        assertThat(inventory.getProduct(0)).isEqualTo(testProduct);
+        var addedProduct = inventory.contains(testProduct);
+
+        assertThat(addedProduct).isTrue();
+
     }
 
     @Test
-    void removeProductRemovesProductFromInventory(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
+    void containsShouldReturnTrueFalseIfThereIsNoMathingIsbn() {
+        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
+        inventory.add(product, 10);
 
-        inventory.add(testProduct);
-        inventory.remove(testProduct);
+        assertThat(inventory.contains(new Product("Svart Te", BigDecimal.ONE, "12345"))).isFalse();
 
-        assertThat(inventory.size()).isZero();
-
-    }
-    @Test
-    void removeProductWithIdRemovesCorrectProduct(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
-        var testProduct2 = new Product("test2", BigDecimal.ONE, 100, "2");
-
-        inventory.add(testProduct);
-        inventory.add(testProduct2);
-        inventory.remove(0L);
-
-        assertThat(inventory.getProduct(0)).isEqualTo(testProduct2);
-
-
-    }
-    @Test
-    void totalPriceReturnsCorrectAmount(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
-        var testProduct2 = new Product("test", BigDecimal.ONE, 100,"2");
-
-        inventory.add(testProduct);
-        inventory.add(testProduct2);
-
-        var totalPrice = inventory.totalPrice();
-
-        assertThat(totalPrice).isEqualTo(BigDecimal.TWO);
     }
 
     @Test
-    void callingClearMethodClearsInventoryFromProducts(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
-        var testProduct2 = new Product("test", BigDecimal.ONE, 100, "2");
-        var testProduct3 = new Product("test", BigDecimal.ONE, 100, "3");
-        var testProduct4 = new Product("test", BigDecimal.ONE, 100, "4");
-
-        inventory.add(testProduct);
-        inventory.add(testProduct2);
-        inventory.add(testProduct3);
-        inventory.add(testProduct4);
-        inventory.clear();
-
-        assertThat(inventory.size()).isZero();
+    void removingMoreThanIsIn() {
 
     }
 
 }
+

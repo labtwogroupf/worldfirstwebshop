@@ -4,37 +4,43 @@ import org.junit.jupiter.api.Test;
 import se.iths.worldfirstwebshop.webshop.product.Product;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CartTest {
 
     Cart products = new Cart();
 
     @Test
-    void totalPriceShouldReturn100() {
-        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2, "1"));
-        products.add(new Product("Citron", BigDecimal.valueOf(30), 1, "2"));
-        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3, "3"));
-        BigDecimal expected = BigDecimal.valueOf(100);
+    void having3InCartAndAdding3MoreShouldAddTotalAmountTo6() {
+        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
 
-        assertEquals(expected, products.totalPrice());
+        products.add(product, 3);
+        products.add(product, 3);
+
+        assertThat(products.getAmountInCart(product)).isEqualTo(6);
 
     }
 
     @Test
-    void should() {
-        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2, "1"));
-        products.clear();
-        products.add(new Product("Citron", BigDecimal.valueOf(30), 1,"2"));
-        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3, "3"));
-        int expected = 2;
+    void adding3ShouldReturn3InTotalAmountIfThereIsAnEmptyCart() {
 
-        assertEquals(expected, products.getSize());
+        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
 
+        products.add(product, 3);
 
+        assertThat(products.getAmountInCart(product)).isEqualTo(3);
 
     }
+
+    @Test
+    void removingMoreThanIsInCartRemovesProduct() {
+
+        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
+        products.add(product, 5);
+        products.remove(product, 10);
+
+        assertThat(products.getProducts().containsKey(product)).isFalse();
+    }
+
 }
