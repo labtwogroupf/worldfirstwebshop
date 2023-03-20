@@ -14,11 +14,12 @@ class InventoryTest {
     @Test
     void addProductToInventoryAddsProduct() {
 
-        var testProduct = new Product("test", BigDecimal.ONE,"100");
+        var testProduct = new Product("test", BigDecimal.ONE, "100");
+        inventory.add(testProduct, 1);
 
-        inventory.add(testProduct);
+        var addedProduct = inventory.contains(testProduct);
 
-        assertThat(inventory.getNrOfProductsInStock().isEqualTo(testProduct);
+        assertThat(addedProduct).isTrue();
 
     }
 
