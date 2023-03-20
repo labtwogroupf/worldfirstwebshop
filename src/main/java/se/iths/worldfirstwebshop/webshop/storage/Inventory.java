@@ -6,40 +6,41 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventory implements Stock {
+public class Inventory{
 
     private final List<Product> inventory = new ArrayList<>();
 
-    @Override
+    public List<Product> getInventory() {
+        return inventory;
+    }
+
     public void add(Product product) {
         inventory.add(product);
     }
 
-    @Override
     public void remove(Product product) {
         inventory.remove(product);
 
     }
 
-    @Override
     public void remove(Long id) {
         //add remove by id later, now removes index
         inventory.remove(Math.toIntExact(id));
     }
 
-    @Override
+
     public void print() {
         inventory.forEach(product -> System.out.println(product.getName()));
     }
 
-    @Override
+
     public BigDecimal totalPrice() {
         BigDecimal sum = BigDecimal.ZERO;
         for (Product product : inventory) sum = sum.add(product.getPrice());
         return sum;
     }
 
-    @Override
+
     public void clear() {
         inventory.clear();
     }
@@ -49,34 +50,19 @@ public class Inventory implements Stock {
     }
 
     public Product getProduct(Product product) {
-
-        for (Product value : inventory) {
-            if (value.equals(product)) {
-                return value;
-            }
-
-        }
-
-        return null;
-
+        return inventory.stream()
+                .filter(p -> p.getIsbn().equals(product.getIsbn()))
+                .findFirst()
+                .orElse(null);
     }
+
 
     public int size() {
 
         return inventory.size();
     }
-    public void decreaseAmount(Product product){
-        returnProduct(product).decreaseAmount();
-    }
-    public void increaseAmount(Product product){
-        returnProduct(product).increaseAmount();
-    }
 
-    public Product returnProduct(Product product){
-        for (Product value : inventory)
-            if (value.equals(product))
-                return value;
 
-        return null;
-    }
+
+
 }
