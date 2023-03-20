@@ -13,7 +13,7 @@ class InventoryTest {
 
     @Test
     void addProductToInventoryAddsProduct() {
-        var testProduct = new Product("test", BigDecimal.ONE, 100);
+        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
 
         inventory.add(testProduct);
 
@@ -22,7 +22,7 @@ class InventoryTest {
 
     @Test
     void removeProductRemovesProductFromInventory(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100);
+        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
 
         inventory.add(testProduct);
         inventory.remove(testProduct);
@@ -32,8 +32,8 @@ class InventoryTest {
     }
     @Test
     void removeProductWithIdRemovesCorrectProduct(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100);
-        var testProduct2 = new Product("test2", BigDecimal.ONE, 100);
+        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
+        var testProduct2 = new Product("test2", BigDecimal.ONE, 100, "2");
 
         inventory.add(testProduct);
         inventory.add(testProduct2);
@@ -45,8 +45,8 @@ class InventoryTest {
     }
     @Test
     void totalPriceReturnsCorrectAmount(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100);
-        var testProduct2 = new Product("test", BigDecimal.ONE, 100);
+        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
+        var testProduct2 = new Product("test", BigDecimal.ONE, 100,"2");
 
         inventory.add(testProduct);
         inventory.add(testProduct2);
@@ -58,10 +58,10 @@ class InventoryTest {
 
     @Test
     void callingClearMethodClearsInventoryFromProducts(){
-        var testProduct = new Product("test", BigDecimal.ONE, 100);
-        var testProduct2 = new Product("test", BigDecimal.ONE, 100);
-        var testProduct3 = new Product("test", BigDecimal.ONE, 100);
-        var testProduct4 = new Product("test", BigDecimal.ONE, 100);
+        var testProduct = new Product("test", BigDecimal.ONE, 100, "1");
+        var testProduct2 = new Product("test", BigDecimal.ONE, 100, "2");
+        var testProduct3 = new Product("test", BigDecimal.ONE, 100, "3");
+        var testProduct4 = new Product("test", BigDecimal.ONE, 100, "4");
 
         inventory.add(testProduct);
         inventory.add(testProduct2);

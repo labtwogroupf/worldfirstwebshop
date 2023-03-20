@@ -1,17 +1,30 @@
 package se.iths.worldfirstwebshop.webshop.product;
-
 import java.math.BigDecimal;
 
 public class Product {
 
     private String name;
     private BigDecimal price;
-    private int numberInStock;
+    private int amountInStock;
+    private String isbn;
 
-    public Product(String name, BigDecimal price, int numberInStock) {
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setAmountInStock(int amountInStock) {
+        this.amountInStock = amountInStock;
+    }
+
+    public Product(String name, BigDecimal price, int numberInStock, String isbn) {
         this.name = name;
         this.price = price;
-        this.numberInStock = numberInStock;
+        this.amountInStock = numberInStock;
+        this.isbn = isbn;
     }
 
     public String getName() {
@@ -24,16 +37,7 @@ public class Product {
     }
 
 
-    public int getNumberInStock() {
-        return numberInStock;
-    }
-
-
-    public void increaseAmount(){
-        numberInStock++;
-    }
-
-    public void decreaseAmount(){
-        numberInStock--;
+    public int getAmountInStock() {
+        return amountInStock;
     }
 }

@@ -15,9 +15,9 @@ class CartTest {
 
     @Test
     void totalPriceShouldReturn100() {
-        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2));
-        products.add(new Product("Citron", BigDecimal.valueOf(30), 1));
-        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3));
+        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2, "1"));
+        products.add(new Product("Citron", BigDecimal.valueOf(30), 1, "2"));
+        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3, "3"));
         BigDecimal expected = BigDecimal.valueOf(100);
 
         assertEquals(expected, products.totalPrice());
@@ -26,10 +26,10 @@ class CartTest {
 
     @Test
     void should() {
-        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2));
+        products.add(new Product("Svartvinbär", BigDecimal.valueOf(20), 2, "1"));
         products.clear();
-        products.add(new Product("Citron", BigDecimal.valueOf(30), 1));
-        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3));
+        products.add(new Product("Citron", BigDecimal.valueOf(30), 1,"2"));
+        products.add(new Product("Vanilj", BigDecimal.valueOf(10), 3, "3"));
         int expected = 2;
 
         assertEquals(expected, products.getSize());
@@ -37,7 +37,4 @@ class CartTest {
 
 
     }
-
-
-
 }

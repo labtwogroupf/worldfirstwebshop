@@ -7,46 +7,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Cart implements Stock {
+public class Cart{
 
-    private final List<Product> products;
+    private final List<Product> products = new ArrayList<>();
 
-    public Cart() {
-        this.products = new ArrayList<>();
-    }
-
-
-    @Override
     public void add(Product product){
         products.add(product);
 
     }
 
-    @Override
     public void print(){
         products.forEach(System.out::println);
     }
 
-    @Override
+
     public BigDecimal totalPrice(){
         return products.stream()
-                .map(p -> p.getPrice().multiply(BigDecimal.valueOf(p.getNumberInStock())))
+                .map(p -> p.getPrice().multiply(BigDecimal.valueOf(p.getAmountInStock())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    @Override
+
     public void clear(){
         products.clear();
     }
 
-    @Override
-    public void remove(Product product) {
 
+    public void remove(Product product) {
         products.remove(product);
     }
 
 
-    @Override
     public void remove(Long id){
 
         //Add later when we got id
@@ -57,28 +48,16 @@ public class Cart implements Stock {
     public int getSize(){
         return products.size();
     }
+
     public List<Product> getCart(){
         return products;
     }
 
-    public boolean contains(Product product) {
-        return products.contains(product);
+
+    public Product getProduct(Product product) {
+        return products.stream()
+                .filter(p -> p.getIsbn().equals(product.getIsbn()))
+                .findFirst()
+                .orElse(null);
     }
-
-
-    public void decreaseAmount(Product product){
-        returnProduct(product).decreaseAmount();
-    }
-    public void increaseAmount(Product product){
-        returnProduct(product).increaseAmount();
-    }
-
-    public Product returnProduct(Product product){
-        for (Product value : products)
-            if (value.equals(product))
-                return value;
-
-        return null;
-    }
-
 }
