@@ -20,7 +20,6 @@ class InventoryTest {
 
         assertThat(inventory.getNrOfProductsInStock().isEqualTo(testProduct);
 
-
     }
 
     @Test
@@ -33,8 +32,8 @@ class InventoryTest {
     }
 
     @Test
-    void removingMoreThanIsIn(){
-        
+    void removingMoreThanIsIn() {
+
     }
 
 }

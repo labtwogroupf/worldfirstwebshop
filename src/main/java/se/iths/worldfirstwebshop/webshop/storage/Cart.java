@@ -27,12 +27,11 @@ public class Cart {
         }
     }
 
-
     public int getAmountInCart(Product product) {
         return Objects.requireNonNullElse(products.get(product), 0);
     }
 
-    public void clear(){
+    public void clear() {
         products.clear();
     }
 

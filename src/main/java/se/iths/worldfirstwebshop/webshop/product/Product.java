@@ -22,8 +22,6 @@ public class Product {
         return name;
     }
 
-
-
     public boolean matchingIsbn(String isbn) {
         return this.isbn.equals(isbn);
     }
