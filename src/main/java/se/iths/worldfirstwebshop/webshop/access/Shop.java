@@ -17,8 +17,7 @@ public class Shop {
 
         public void addToCart(Product product, int amount) {
 
-            var inventoryProduct = inventory.
-        //var inventoryProduct = inventory.getProduct(product);
+        var inventoryProduct = inventory.getProduct(product);
         var cartProduct = cart.getProduct(product);
         int maxPossibleAmount = Math.min(amount, inventoryProduct.getAmountInStock());
 

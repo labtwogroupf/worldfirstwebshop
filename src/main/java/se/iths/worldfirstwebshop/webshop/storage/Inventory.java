@@ -40,7 +40,7 @@ public class Inventory{
     }
 
     public Product getProduct(Product product) {
-
+        
 
         return inventory.stream()
                 .filter(p -> p.getIsbn().equals(product.getIsbn()))
