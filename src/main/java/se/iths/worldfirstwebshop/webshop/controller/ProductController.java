@@ -35,8 +35,8 @@ public class ProductController {
         repo.save(mapper.mapToEntity(product));
     }
 
-    @DeleteMapping("/{id}")
-    void removeProductById(@PathVariable long id) {
-        repo.deleteById(id);
-    }
+//    @DeleteMapping("/{id}")
+//    void removeProductById(@PathVariable long id) {
+//        repo.deleteById(id);
+//    }
 }
