@@ -1,9 +1,6 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 
@@ -20,6 +17,15 @@ public class ProductController {
     @GetMapping("/{id}")
     ProductEntity getAProduct(@PathVariable long id){
         return repo.findById(id).orElseThrow();
+    }
+
+    @PostMapping
+    void addProduct(@RequestBody ProductEntity product){
+        repo.save(product);
+    }
+    @DeleteMapping("/{id}")
+    void removeProductById(@PathVariable long id) {
+        repo.deleteById(id);
     }
 
 
