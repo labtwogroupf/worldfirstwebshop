@@ -22,6 +22,10 @@ public class Product {
         return name;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
     public boolean matchingIsbn(String isbn) {
         return this.isbn.equals(isbn);
     }
