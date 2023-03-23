@@ -8,10 +8,9 @@ import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 @Entity
 @Getter
 @Setter
-@NamedEntityGraph(name ="Inventory.products",
-attributeNodes = @NamedAttributeNode("product"))
+@NamedEntityGraph(name = "Inventory.products",
+        attributeNodes = @NamedAttributeNode("product"))
 public class InventoryEntity {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
