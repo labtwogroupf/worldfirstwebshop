@@ -27,6 +27,4 @@ public class ProductController {
     void removeProductById(@PathVariable long id) {
         repo.deleteById(id);
     }
-
-
 }
