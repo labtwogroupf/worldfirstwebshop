@@ -50,4 +50,5 @@ public class Shop {
     private void removeBoughtItemsFromInventory(Product product) {
         inventory.remove(product, cart.getAmountInCart(product));
     }
+
 }
