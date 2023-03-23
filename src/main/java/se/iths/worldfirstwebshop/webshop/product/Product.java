@@ -9,6 +9,12 @@ public class Product {
     private BigDecimal price;
     private String isbn;
 
+    public Product(String name, BigDecimal price, String isbn) {
+        this.name = name;
+        this.price = price;
+        this.isbn = isbn;
+    }
+
     public Long getId() {
         return id;
     }
