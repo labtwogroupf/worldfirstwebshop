@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class ProductDto {
 
-    @NotNull
+
     private Long id;
     @NotNull
     String name;
