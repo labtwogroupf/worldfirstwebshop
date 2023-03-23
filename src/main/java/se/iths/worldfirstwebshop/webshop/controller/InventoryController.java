@@ -1,9 +1,13 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
 import org.springframework.web.bind.annotation.*;
+import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
+import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventory")
@@ -11,9 +15,11 @@ public class InventoryController {
 
     InventoryRepository inventoryRepo;
     ProductRepository productRepo;
+    Mapper mapper;
 
-    public InventoryController(InventoryRepository repo) {
+    public InventoryController(InventoryRepository repo,ProductRepository productRepo) {
         this.inventoryRepo = repo;
+        this.productRepo = productRepo;
     }
 
     @PutMapping("/subtract/{id}")
@@ -43,6 +49,12 @@ public class InventoryController {
             inventoryRepo.deleteById(id);
     }
 
+    @GetMapping("/products")
+        public List<InventoryDto> getProducts(){
+        return inventoryRepo.findAll().stream().map(inventoryEntity -> mapper.mapToInventoryDto(inventoryEntity)).toList();
+        }
+
+    }
 
 
 
@@ -53,4 +65,4 @@ public class InventoryController {
 
 
 
-}
+

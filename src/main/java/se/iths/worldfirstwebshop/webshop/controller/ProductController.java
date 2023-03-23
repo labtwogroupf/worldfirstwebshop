@@ -5,6 +5,8 @@ import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -17,6 +19,12 @@ public class ProductController {
         this.mapper = mapper;
     }
 
+    @GetMapping
+    List<ProductDto> getAllProducts(){
+        return repo.findAll().stream().map(product -> mapper.mapToDto(product)).toList();
+    }
+
+
     @GetMapping("/{id}")
     ProductDto getAProduct(@PathVariable long id) {
         return mapper.mapToDto(repo.findById(id).orElseThrow());
@@ -27,8 +35,8 @@ public class ProductController {
         repo.save(mapper.mapToEntity(product));
     }
 
-    @DeleteMapping("/{id}")
-    void removeProductById(@PathVariable long id) {
-        repo.deleteById(id);
-    }
+//    @DeleteMapping("/{id}")
+//    void removeProductById(@PathVariable long id) {
+//        repo.deleteById(id);
+//    }
 }
