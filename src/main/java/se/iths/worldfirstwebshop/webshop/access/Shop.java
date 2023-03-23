@@ -1,9 +1,13 @@
 package se.iths.worldfirstwebshop.webshop.access;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.ApplicationScope;
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.storage.Cart;
 import se.iths.worldfirstwebshop.webshop.storage.Inventory;
 
+@Component
 public class Shop {
 
     private final Cart cart;

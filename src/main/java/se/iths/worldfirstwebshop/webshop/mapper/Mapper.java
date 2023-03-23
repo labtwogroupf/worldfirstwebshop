@@ -1,9 +1,13 @@
 package se.iths.worldfirstwebshop.webshop.mapper;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.ApplicationScope;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 
+
+@Component
 public class Mapper {
 
     public ProductEntity mapToEntity(Product product) {
