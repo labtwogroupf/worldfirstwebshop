@@ -22,12 +22,11 @@ public class ProductDto {
         this.id = id;
     }
 
-    @NotNull
     public Long getId() {
         return id;
     }
 
-    public void setId(@NotNull Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
