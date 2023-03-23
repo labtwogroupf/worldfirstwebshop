@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://www.bakgrunder.com/wallpaper/wp-content/uploads/2021/01/Hepatica-nobilis-Schreb.jpg" width="500">
+    <img src="https://www.bakgrunder.com/wallpaper/wp-content/uploads/2021/01/Hepatica-nobilis-Schreb.jpg" width="800">
 </h1>
 
 <section>
