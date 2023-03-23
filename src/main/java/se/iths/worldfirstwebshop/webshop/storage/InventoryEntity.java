@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
-import java.util.*;
 
 @Entity
 @Getter
 @Setter
 @NamedEntityGraph(name ="Inventory.products",
-attributeNodes = @NamedAttributeNode("products"))
+attributeNodes = @NamedAttributeNode("product"))
 public class InventoryEntity {
 
 
@@ -19,7 +18,7 @@ public class InventoryEntity {
     private Long id;
     private int amount;
 
-    @OneToMany
-    private final Set<ProductEntity> products = new HashSet<>();
+    @OneToOne
+    private ProductEntity product;
 
 }

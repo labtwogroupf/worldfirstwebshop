@@ -30,10 +30,6 @@ public class ProductEntity {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
-        return result;
+        return 97;
     }
 }
