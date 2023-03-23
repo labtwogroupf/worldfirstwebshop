@@ -6,7 +6,7 @@ import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 
 public class Mapper {
 
-    public ProductEntity map(Product product) {
+    public ProductEntity mapToEntity(Product product) {
         var productE = new ProductEntity();
         productE.setName(product.getName());
         productE.setIsbn(product.getIsbn());
@@ -14,7 +14,7 @@ public class Mapper {
         return productE;
     }
 
-    public ProductEntity map(ProductDto product) {
+    public ProductEntity mapToEntity(ProductDto product) {
         var productE = new ProductEntity();
         productE.setName(product.getName());
         productE.setIsbn(product.getIsbn());
@@ -26,16 +26,16 @@ public class Mapper {
         return new Product(product.getName(), product.getPrice(), product.getIsbn());
     }
 
-    public Product mapFromDto(ProductDto product) {
-        return null;
+    public Product mapToProduct(ProductDto product) {
+        return new Product(product.getName(), product.getPrice(), product.getIsbn());
     }
 
-    public ProductDto map(ProductEntity product) {
-        return null;
+    public ProductDto mapToDto(ProductEntity product) {
+        return new ProductDto(product.getName(), product.getPrice(), product.getIsbn());
     }
 
-    public ProductDto mapFromProductToDto(Product product) {
-        return null;
+    public ProductDto mapToDto(Product product) {
+        return new ProductDto(product.getName(), product.getPrice(), product.getIsbn());
     }
 
 }
