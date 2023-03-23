@@ -20,6 +20,18 @@ public class Shop {
 
     }
 
+    public void checkout() {
+        cart.getProducts()
+                .keySet()
+                .forEach(this::removeBoughtItemsFromInventory);
+        cart.clear();
+    }
+
+    public void removeFromCart(Product product){
+        cart.remove(product, -1);
+
+    }
+
     private boolean checkIfInStock(Product product, int amount) {
 
         if (!inventory.contains(product))
@@ -29,14 +41,6 @@ public class Shop {
         var cartStock = cart.getAmountInCart(product);  //3
 
         return amount <= inventoryStock - cartStock;  // 2 <= 5 - 3 == 2
-    }
-
-    public void checkout() {
-        cart.getProducts()
-                .keySet()
-                .stream()
-                .forEach(this::removeBoughtItemsFromInventory);
-        cart.clear();
     }
 
     public Cart getCart() {
@@ -50,4 +54,7 @@ public class Shop {
     private void removeBoughtItemsFromInventory(Product product) {
         inventory.remove(product, cart.getAmountInCart(product));
     }
+
+
+
 }
