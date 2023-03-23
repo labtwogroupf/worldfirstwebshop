@@ -1,9 +1,6 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
@@ -27,17 +24,17 @@ public class ShopController {
         this.inventoryRepo = inventoryRepo;
     }
 
-    @PostMapping
+    @PutMapping("/add")
     void addToCart(@RequestBody ProductDto product, int amount) {
         shop.addToCart(mapper.mapToProduct(product), amount);
     }
 
-    @PostMapping
+    @PutMapping("/remove")
     void removeFromCart(@RequestBody ProductDto product) {
         shop.removeFromCart(mapper.mapToProduct(product));
     }
 
-    @PostMapping
+    @PutMapping("/checkout")
     void checkout() {
         shop.checkout();
         var currentInventory = inventoryRepo.findAll();
