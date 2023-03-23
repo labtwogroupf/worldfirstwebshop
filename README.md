@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://www.iths.se/wp-content/uploads/2016/02/thumbnails/ithslogoliggandepayoffrgb-4601-1280x450.png" height="130" alt="ITHS">
+    <img src="https://www.bakgrunder.com/wallpaper/wp-content/uploads/2021/01/Hepatica-nobilis-Schreb.jpg" width="500">
 </h1>
 
 <section>
