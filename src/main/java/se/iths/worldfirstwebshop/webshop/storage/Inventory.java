@@ -37,4 +37,7 @@ public class Inventory{
         this.inventory.put(product, currentAmount - amount);
     }
 
+    public Map<Product, Integer> getInventory() {
+        return inventory;
+    }
 }
