@@ -1,5 +1,7 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
@@ -25,28 +27,35 @@ public class ShopController {
     }
 
     @PutMapping("/add")
-    void addToCart(@RequestBody ProductDto product, int amount) {
+    ResponseEntity addToCart(@RequestBody ProductDto product, int amount) {
         shop.addToCart(mapper.mapToProduct(product), amount);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/remove")
-    void removeFromCart(@RequestBody ProductDto product) {
+    ResponseEntity removeFromCart(@RequestBody ProductDto product) {
         shop.removeFromCart(mapper.mapToProduct(product));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/checkout")
-    void checkout() {
+    @GetMapping("/checkout")
+    ResponseEntity checkout() {
+
+
+        if(shop.getCart()==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
         shop.checkout();
         var currentInventory = inventoryRepo.findAll();
         var inventoryAfterPurchase = shop.getInventory().getInventory();
 
         for (InventoryEntity product : currentInventory)
-            checkIfExistsAndUpdateAmount(inventoryAfterPurchase,product);
+            checkIfExistsAndUpdateAmount(inventoryAfterPurchase, product);
 
-
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    private static void checkIfExistsAndUpdateAmount(Map<Product, Integer> map, InventoryEntity product) {
+    public static void checkIfExistsAndUpdateAmount(Map<Product, Integer> map, InventoryEntity product) {
         if (map.containsKey(product.getProduct()))
             product.setAmount(map.get(product));
 

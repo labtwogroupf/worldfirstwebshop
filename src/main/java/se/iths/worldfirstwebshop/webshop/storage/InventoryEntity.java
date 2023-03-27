@@ -3,6 +3,7 @@ package se.iths.worldfirstwebshop.webshop.storage;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 
 @Entity
@@ -20,4 +21,10 @@ public class InventoryEntity {
     @OneToOne
     private ProductEntity product;
 
+    public InventoryEntity(Product product, int i) {
+    }
+
+    public InventoryEntity() {
+
+    }
 }
