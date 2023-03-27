@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 
 public class ProductDto {
 
-
     private Long id;
     @NotNull
     String name;
@@ -20,6 +19,12 @@ public class ProductDto {
         this.price = price;
         this.isbn = isbn;
         this.id = id;
+    }
+
+    public ProductDto(String name, BigDecimal price, String isbn) {
+        this.name = name;
+        this.price = price;
+        this.isbn = isbn;
     }
 
     public Long getId() {
