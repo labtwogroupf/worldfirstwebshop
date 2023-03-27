@@ -11,6 +11,9 @@ import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 @Component
 public class Mapper {
 
+    public Mapper(){
+
+    }
     public InventoryDto mapToInventoryDto(InventoryEntity inv) {
 
         return new InventoryDto(inv.getAmount(),mapToDto(inv.getProduct()));
