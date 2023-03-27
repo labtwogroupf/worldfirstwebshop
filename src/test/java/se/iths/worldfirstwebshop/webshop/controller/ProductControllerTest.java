@@ -1,28 +1,27 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
 
-import org.hamcrest.Matchers;
-import org.hibernate.engine.jdbc.Size;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.web.context.WebApplicationContext;
-import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
+import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
-import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ProductController.class)
@@ -31,15 +30,14 @@ class ProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
+    @Autowired
+    private ProductController controller;
     @MockBean
     private ProductRepository repo;
     @MockBean
-    private ProductController controller;
-    @MockBean
-    private ProductDto productDto;
-    @MockBean
-    private ProductEntity productEntity;
+    Mapper mapper;
+
+
 
 
 
@@ -71,5 +69,33 @@ class ProductControllerTest {
         mockMvc.perform(get("/api/products/2"))
                 .andExpect(status().isOk());
         assertEquals(product2,result);
+    }
+    @Test
+    void addProductShouldAddProduct() throws Exception{
+        ProductEntity product1 = new ProductEntity();
+        product1.setId(1L);
+        product1.setName("Black tea");
+        product1.setPrice(BigDecimal.valueOf(100));
+        product1.setIsbn("1234567");
+
+        when(repo.save(product1)).thenReturn(product1);
+        when(repo.findById(1L)).thenReturn(Optional.of(product1));
+        mockMvc.perform(post("/api/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                """
+                {
+                "id":1,
+                "name":"Black Tea",
+                "price":100,
+                "isbn":"1234567"
+                }
+                """))
+                .andExpect(status().isCreated());
+
+
+
+
+
     }
 }
