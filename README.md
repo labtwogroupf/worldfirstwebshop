@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://th.bing.com/th/id/OIG.jg67TaOmwfArAf5dmSUr?pid=ImgGn" width="400">
+    <img src="https://th.bing.com/th/id/OIG.jg67TaOmwfArAf5dmSUr?pid=ImgGn" width="350">
 </h1>
 
 <section>
