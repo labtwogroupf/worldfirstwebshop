@@ -1,9 +1,8 @@
-package se.iths.worldfirstwebshop.webshop.storage;
+package se.iths.worldfirstwebshop.webshop.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 
 @Entity
 @Getter

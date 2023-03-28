@@ -1,6 +1,6 @@
-package se.iths.worldfirstwebshop.webshop.storage;
+package se.iths.worldfirstwebshop.webshop.domain.storage;
 
-import se.iths.worldfirstwebshop.webshop.product.Product;
+import se.iths.worldfirstwebshop.webshop.domain.Product;
 
 import java.util.HashMap;
 import java.util.Map;

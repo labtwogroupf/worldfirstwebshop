@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
+import se.iths.worldfirstwebshop.webshop.entities.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 
 import java.math.BigDecimal;

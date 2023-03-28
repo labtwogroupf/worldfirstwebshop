@@ -3,9 +3,9 @@ package se.iths.worldfirstwebshop.webshop.mapper;
 import org.junit.jupiter.api.Test;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
-import se.iths.worldfirstwebshop.webshop.product.Product;
-import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
+import se.iths.worldfirstwebshop.webshop.domain.Product;
+import se.iths.worldfirstwebshop.webshop.entities.ProductEntity;
+import se.iths.worldfirstwebshop.webshop.entities.InventoryEntity;
 
 import java.math.BigDecimal;
 

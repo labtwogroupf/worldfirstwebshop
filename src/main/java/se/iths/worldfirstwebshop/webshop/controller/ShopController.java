@@ -1,12 +1,12 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
 import org.springframework.web.bind.annotation.*;
-import se.iths.worldfirstwebshop.webshop.access.Shop;
+import se.iths.worldfirstwebshop.webshop.domain.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.product.Product;
+import se.iths.worldfirstwebshop.webshop.domain.Product;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
+import se.iths.worldfirstwebshop.webshop.entities.InventoryEntity;
 
 import java.util.Map;
 

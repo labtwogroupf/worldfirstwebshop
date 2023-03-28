@@ -1,4 +1,4 @@
-package se.iths.worldfirstwebshop.webshop.product;
+package se.iths.worldfirstwebshop.webshop.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

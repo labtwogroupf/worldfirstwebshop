@@ -9,10 +9,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
+import se.iths.worldfirstwebshop.webshop.entities.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
+import se.iths.worldfirstwebshop.webshop.entities.InventoryEntity;
 
 import java.util.List;
 
