@@ -1,54 +1,35 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.springframework.web.bind.annotation.*;
-import se.iths.worldfirstwebshop.webshop.access.Shop;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
-import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.product.Product;
-import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
-
-import java.util.Map;
+import se.iths.worldfirstwebshop.webshop.service.ShopService;
 
 @RestController
 @RequestMapping("/api/shop")
 public class ShopController {
 
-    Shop shop;
-    Mapper mapper;
-    InventoryRepository inventoryRepo;
+    ShopService service;
 
-    public ShopController(Shop shop, Mapper mapper, InventoryRepository inventoryRepo) {
-        this.shop = shop;
-        this.mapper = mapper;
-        this.inventoryRepo = inventoryRepo;
+    public ShopController(ShopService service) {
+        this.service = service;
     }
 
     @PutMapping("/add")
     void addToCart(@RequestBody ProductDto product, int amount) {
-        shop.addToCart(mapper.mapToProduct(product), amount);
+        service.addToCart(product, amount);
     }
 
     @PutMapping("/remove")
     void removeFromCart(@RequestBody ProductDto product) {
-        shop.removeFromCart(mapper.mapToProduct(product));
+        service.removeFromCart(product);
     }
 
     @PutMapping("/checkout")
     void checkout() {
-        shop.checkout();
-        var currentInventory = inventoryRepo.findAll();
-        var inventoryAfterPurchase = shop.getInventory().getInventory();
-
-        for (InventoryEntity product : currentInventory)
-            checkIfExistsAndUpdateAmount(inventoryAfterPurchase,product);
-
-
-    }
-
-    private static void checkIfExistsAndUpdateAmount(Map<Product, Integer> map, InventoryEntity product) {
-        if (map.containsKey(product.getProduct()))
-            product.setAmount(map.get(product));
+        service.checkout();
 
     }
 
