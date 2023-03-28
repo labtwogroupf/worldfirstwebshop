@@ -1,7 +1,9 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
@@ -19,6 +21,7 @@ public class ShopController {
     Shop shop;
     Mapper mapper;
     InventoryRepository inventoryRepo;
+
 
     public ShopController(Shop shop, Mapper mapper, InventoryRepository inventoryRepo) {
         this.shop = shop;
@@ -38,12 +41,9 @@ public class ShopController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     @GetMapping("/checkout")
     ResponseEntity checkout() {
-
-
-        if(shop.getCart()==null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         shop.checkout();
         var currentInventory = inventoryRepo.findAll();
@@ -52,13 +52,12 @@ public class ShopController {
         for (InventoryEntity product : currentInventory)
             checkIfExistsAndUpdateAmount(inventoryAfterPurchase, product);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    public static void checkIfExistsAndUpdateAmount(Map<Product, Integer> map, InventoryEntity product) {
+    public void checkIfExistsAndUpdateAmount(Map<Product, Integer> map, InventoryEntity product) {
         if (map.containsKey(product.getProduct()))
             product.setAmount(map.get(product));
 
     }
-
 }
