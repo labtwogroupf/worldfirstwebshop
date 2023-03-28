@@ -1,5 +1,8 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
@@ -31,12 +34,10 @@ public class ProductController {
     }
 
     @PostMapping
-    void addProduct(@RequestBody ProductDto product) {
+    ResponseEntity addProduct(@RequestBody ProductDto product) {
         repo.save(mapper.mapToEntity(product));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 
-//    @DeleteMapping("/{id}")
-//    void removeProductById(@PathVariable long id) {
-//        repo.deleteById(id);
-//    }
 }
