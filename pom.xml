@@ -10,8 +10,10 @@
     </parent>
     <groupId>se.iths</groupId>
     <artifactId>worldfirstwebshop</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
     <name>worldfirstwebshop</name>
+    <url>http://WorldFirstWebShop.org</url>
     <description>worldfirstwebshop</description>
     <properties>
         <java.version>19</java.version>
@@ -65,6 +67,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
                 <configuration>
                     <excludes>
                         <exclude>
