@@ -1,5 +1,6 @@
 package se.iths.worldfirstwebshop.webshop.mapper;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
@@ -7,9 +8,12 @@ import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class Mapper {
@@ -30,6 +34,35 @@ public class Mapper {
 
         return list;
     }
+
+    public List<InventoryEntity> getInventoryEntitiesAsList(Map<ProductEntity, Integer> map) {
+        List<InventoryEntity> list = new ArrayList<>();
+
+        for (int i = 0; i < map.size(); i++) {
+            InventoryEntity e = new InventoryEntity();
+            e.setAmount(list.get(i).getAmount());
+            e.setProduct(list.get(i).getProduct());
+            list.add(e);
+        }
+//
+//                map
+//                .keySet()
+//                .stream()
+//                .map(mapToEntity())
+//                .collect(Collectors.toList());
+
+        return list;
+    }
+
+//    @NotNull
+//    private static Function<ProductEntity, Object> mapToEntity() {
+//        return aLong -> {
+//            InventoryEntity ent = new InventoryEntity();
+//            ent.setProduct(aLong);
+//            ent.setAmount(ent.getAmount());
+//
+//        };
+//    }
 
     public ProductEntity mapToEntity(Product product) {
         var productE = new ProductEntity();

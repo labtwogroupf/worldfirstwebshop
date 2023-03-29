@@ -5,6 +5,7 @@ import se.iths.worldfirstwebshop.webshop.product.Product;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class Inventory {
@@ -49,8 +50,7 @@ public class Inventory {
                 .stream()
                 .filter(matchingIsbn(product))
                 .findFirst()
-                .orElse(null);
-
+                .orElseThrow();
     }
 
     @NotNull

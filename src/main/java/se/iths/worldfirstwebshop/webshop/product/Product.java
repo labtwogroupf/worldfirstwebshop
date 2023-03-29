@@ -15,6 +15,13 @@ public class Product {
         this.isbn = isbn;
     }
 
+    public Product(Product product) {
+        this.name = product.name;
+        this.id = product.id;
+        this.price = product.price;
+        this.isbn = product.isbn;
+    }
+
     public Long getId() {
         return id;
     }
