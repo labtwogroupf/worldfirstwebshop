@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory</title>
+</head>
+<body>
+<div th:insert="~{fragments::menu1}"></div>
+
+<table>
+  <tr th:each="invens: ${allInventories}">
+    <td th:text="${invens.getProduct().getName()}"></td>
+    <td th:text="${invens.getProduct().getPrice() + 'kr'}"></td>
+    <td th:text="${invens.getAmount()}"></td>
+  </tr>
+</table>
+<div th:insert="~{fragments::footer}"></div>
+</body>
+</html>
