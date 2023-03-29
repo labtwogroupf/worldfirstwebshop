@@ -14,7 +14,7 @@ import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.storage.Cart;
 import se.iths.worldfirstwebshop.webshop.storage.Inventory;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
+
 
 import java.math.BigDecimal;
 import java.util.List;
