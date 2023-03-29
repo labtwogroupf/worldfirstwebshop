@@ -32,6 +32,9 @@ public class WebController {
     String inventories (Model model){
         model.addAttribute("allInventories", inventoryRepository.findAll());
         return "inventories";
-
+    }
+    @GetMapping("/mainSite")
+    String mainSite (){
+        return "mainSite";
     }
 }

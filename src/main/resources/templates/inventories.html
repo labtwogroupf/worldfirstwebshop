@@ -11,9 +11,12 @@
   <tr th:each="invens: ${allInventories}">
     <td th:text="${invens.getProduct().getName()}"></td>
     <td th:text="${invens.getProduct().getPrice() + 'kr'}"></td>
-    <td th:text="${invens.getAmount()}"></td>
+    <td th:text="${invens.getAmount() + 'st'}"></td>
   </tr>
 </table>
-<div th:insert="~{fragments::footer}"></div>
+<div th:insert="~{fragments::footer1}"></div>
+</body>
+<body>
+<div th:insert="~{fragments::mainFooter}"></div>
 </body>
 </html>
