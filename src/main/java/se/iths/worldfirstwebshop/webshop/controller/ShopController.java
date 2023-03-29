@@ -1,9 +1,6 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
 
@@ -18,7 +15,7 @@ public class ShopController {
     }
 
     @PutMapping("/add")
-    void addToCart(@RequestBody ProductDto product, int amount) {
+    void addToCart(@RequestBody ProductDto product, @RequestParam int amount) {
         service.addToCart(product, amount);
     }
 
@@ -30,7 +27,6 @@ public class ShopController {
     @PutMapping("/checkout")
     void checkout() {
         service.checkout();
-
     }
 
 }
