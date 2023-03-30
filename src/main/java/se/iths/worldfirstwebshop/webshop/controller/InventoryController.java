@@ -47,6 +47,11 @@ public class InventoryController {
         }
     }
 
+    @DeleteMapping("/delete")
+    public void removeAll() {
+        inventoryRepo.deleteAll();
+    }
+
     @DeleteMapping("/delete/{id}")
     public void removeById(@PathVariable Long id) {
         if (inventoryRepo.findById(id).isPresent())

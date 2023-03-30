@@ -8,8 +8,6 @@ import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -21,48 +19,6 @@ public class Mapper {
     public Mapper() {
 
     }
-
-    public InventoryDto mapToInventoryDto(InventoryEntity inv) {
-        return new InventoryDto(inv.getAmount(), mapToDto(inv.getProduct()));
-    }
-
-    public Map<Product, Integer> mapToInventory(List<InventoryEntity> entities) {
-        Map<Product, Integer> list = new HashMap<>();
-
-        for (int i = 0; i < entities.size(); i++)
-            list.put(mapToProduct(entities.get(i).getProduct()), entities.get(i).getAmount());
-
-        return list;
-    }
-
-    public List<InventoryEntity> getInventoryEntitiesAsList(Map<ProductEntity, Integer> map) {
-        List<InventoryEntity> list = new ArrayList<>();
-
-        for (int i = 0; i < map.size(); i++) {
-            InventoryEntity e = new InventoryEntity();
-            e.setAmount(list.get(i).getAmount());
-            e.setProduct(list.get(i).getProduct());
-            list.add(e);
-        }
-//
-//                map
-//                .keySet()
-//                .stream()
-//                .map(mapToEntity())
-//                .collect(Collectors.toList());
-
-        return list;
-    }
-
-//    @NotNull
-//    private static Function<ProductEntity, Object> mapToEntity() {
-//        return aLong -> {
-//            InventoryEntity ent = new InventoryEntity();
-//            ent.setProduct(aLong);
-//            ent.setAmount(ent.getAmount());
-//
-//        };
-//    }
 
     public ProductEntity mapToEntity(Product product) {
         var productE = new ProductEntity();
@@ -96,6 +52,34 @@ public class Mapper {
 
     public ProductDto mapToDto(Product product) {
         return new ProductDto(product.getName(), product.getPrice(), product.getIsbn(), product.getId());
+    }
+
+    public InventoryDto mapToInventoryDto(InventoryEntity inv) {
+        return new InventoryDto(inv.getAmount(), mapToDto(inv.getProduct()));
+    }
+
+    public List<InventoryEntity> getInventoryEntitiesAsLists(Map<ProductEntity, Integer> map) {
+        return map.entrySet()
+                .stream()
+                .map(Mapper::mapToInventoryEntity)
+                .toList();
+    }
+
+    private static InventoryEntity mapToInventoryEntity(Map.Entry<ProductEntity, Integer> entrySet) {
+        InventoryEntity entry = new InventoryEntity();
+        entry.setProduct(entrySet.getKey());
+        entry.setAmount(entrySet.getValue());
+        return entry;
+    }
+
+    public Map<Product, Integer> mapToInventory(List<InventoryEntity> entities) {
+        return entities.stream()
+                .collect(Collectors.toMap(mapToProduct(), InventoryEntity::getAmount));
+    }
+
+    @NotNull
+    private Function<InventoryEntity, Product> mapToProduct() {
+        return inventoryEntity -> mapToProduct(inventoryEntity.getProduct());
     }
 
 }
