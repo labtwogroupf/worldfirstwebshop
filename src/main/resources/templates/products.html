@@ -12,9 +12,11 @@
         <td th:text="${prods.getId()}"></td>
         <td th:text="${prods.getName()}"></td>
         <td th:text="${prods.getPrice() + 'kr'}"></td>
+        <td th:text="${'ISBN: ' + prods.getIsbn()}"></td>
     </tr>
 </table>
 <div th:insert="~{fragments::footer}"></div>
+<div th:insert="~{fragments::footer2}"></div>
 </body>
 <body>
 <div th:insert="~{fragments::mainFooter}"></div>
