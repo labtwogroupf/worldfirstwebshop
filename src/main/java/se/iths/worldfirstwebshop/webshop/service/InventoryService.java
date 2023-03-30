@@ -11,6 +11,7 @@ import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 @Service
 public class InventoryService {
@@ -25,7 +26,10 @@ public class InventoryService {
     }
 
     public List<InventoryDto> getProducts() {
-        return inventoryRepo.findAll().stream().map(inventoryEntity -> mapper.mapToInventoryDto(inventoryEntity)).toList();
+        return inventoryRepo.findAll()
+                .stream()
+                .map(mapToDto())
+                .toList();
     }
 
     public void removeAll() {
@@ -77,6 +81,10 @@ public class InventoryService {
         };
     }
 
+    @NotNull
+    private Function<InventoryEntity, InventoryDto> mapToDto() {
+        return inventoryEntity -> mapper.mapToInventoryDto(inventoryEntity);
+    }
 }
 
 enum Operation {
