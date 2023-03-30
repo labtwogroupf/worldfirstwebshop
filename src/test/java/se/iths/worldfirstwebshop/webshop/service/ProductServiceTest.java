@@ -65,6 +65,6 @@ class ProductServiceTest {
 
         verify(productRepo, times(1)).findAll();
         verify(mapper, times(1)).mapToDto(product);
-        assertTrue(result.contains(productDto));
+        assertThat(result.contains(productDto)).isTrue();
     }
 }
