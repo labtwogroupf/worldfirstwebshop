@@ -1,6 +1,8 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.service.InventoryService;
@@ -19,44 +21,37 @@ public class InventoryController {
     }
 
     @PutMapping("/subtract/{id}")
-    public void updateWhenSold(@PathVariable Long id, @RequestParam int amount) {
+    ResponseEntity updateWhenSold(@PathVariable Long id, @RequestParam int amount) {
         service.updateWhenSold(id, amount);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/add/{id}")
-    public void updateAddToStock(@PathVariable Long id, @RequestParam int amount) {
+    ResponseEntity updateAddToStock(@PathVariable Long id, @RequestParam int amount) {
         service.updateAddToStock(id, amount);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping()
-    public void addProduct(@RequestParam("id") Long productId, int amount) {
+    ResponseEntity addProduct(@RequestParam("id") Long productId, @RequestParam int amount) {
         service.addProduct(productId, amount);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/delete")
-    public void removeAll() {
+    ResponseEntity removeAll() {
         service.removeAll();
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete/{id}")
-    public void removeById(@PathVariable Long id) {
+    ResponseEntity removeById(@PathVariable Long id) {
         service.removeById(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/products")
-    public List<InventoryDto> getProducts() {
+    List<InventoryDto> getProducts() {
         return service.getProducts();
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-

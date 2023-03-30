@@ -1,27 +1,18 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
+import se.iths.worldfirstwebshop.webshop.service.InventoryService;
 
-import java.util.List;
-
-import static java.util.Optional.of;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = InventoryController.class)
@@ -38,82 +29,68 @@ public class InventoryControllerTest {
     @MockBean
     private Mapper mapper;
     @MockBean
+    private InventoryService inventoryService;
+    @MockBean
+    private ProductController productController;
+    @MockBean
     private ShopController shopController;
 
     @Test
-    void buying5ItemsShouldHave2LeftInStockIfItStartedWith7() throws Exception {
-        long id = 1L;
-        int amount = 5;
-        InventoryEntity inventory = new InventoryEntity();
-        inventory.setAmount(7);
-        when(inventoryRepo.findById(id)).thenReturn(of(inventory));
-        when(inventoryRepo.save(inventory)).thenReturn(inventory);
-
-        mockMvc.perform(put("/api/inventory/subtract/{id}", 1)
-                        .param("amount", String.valueOf(amount)))
+    void removingFromStockShouldReturn200ok() throws Exception {
+        mockMvc.perform(put("/api/inventory/subtract/{id}", 1L)
+                        .param("amount", String.valueOf(10)))
                 .andExpect(status().isOk());
-        assertThat(inventory.getAmount()).isEqualTo(2);
+
+        verify(inventoryService, times(1)).updateWhenSold(1L, 10);
 
     }
 
     @Test
-    void adding5ToStockWhenWeHave3ShouldReturnAmountEqualTo8() throws Exception {
-        long id = 1L;
-        int amount = 5;
-        InventoryEntity inventory = new InventoryEntity();
-        inventory.setAmount(3);
-        when(inventoryRepo.findById(id)).thenReturn(of(inventory));
-        when(inventoryRepo.save(inventory)).thenReturn(inventory);
+    void addingToStockShouldReturn200ok() throws Exception {
 
-        mockMvc.perform(put("/api/inventory/add/{id}", 1)
-                        .param("amount", String.valueOf(amount)))
-                .andExpect(status().isOk());
-        assertThat(inventory.getAmount()).isEqualTo(8);
+        mockMvc.perform(put("/api/inventory/add/{id}", 1L)
+                        .param("amount", String.valueOf(10)))
+                        .andExpect(status().isOk());
 
+        verify(inventoryService, times(1)).updateAddToStock(1L, 10);
     }
 
     @Test
-    void addingAProductViaHttpRequestShouldAddItToInventoryRepository() throws Exception {
-        var product = new ProductEntity();
-        product.setName("Grönt Te");
-        var inventory = new InventoryEntity();
-        inventory.setProduct(product);
-        when(productRepository.findById(1L)).thenReturn(of(product));
-        when(inventoryRepo.findById(1L)).thenReturn(of(inventory));
-
+    void addingAProductShouldReturn201Created() throws Exception {
         mockMvc.perform(post("/api/inventory")
                         .param("id", String.valueOf(1L))
-                        .param("amount", String.valueOf(5)))
-                .andExpect(status().isOk());
-        assertThat(inventoryRepo.findById(1L).get().getProduct()).isEqualTo(product);
+                        .param("amount", String.valueOf(10)))
+                        .andExpect(status().isCreated());
 
+        verify(inventoryService, times(1)).addProduct(1L, 10);
+
+    }
+
+    @Test
+    void deleteFromInventoryShouldRemove200ok() throws Exception {
+
+        mockMvc.perform(delete("/api/inventory/delete"))
+                .andExpect(status().isOk());
+
+        verify(inventoryService, times(1)).removeAll();
     }
 
     @Test
     void deleteAnItemFromInventoryShouldRemoveIt() throws Exception {
-        var id = 1L;
-        var inventory = new InventoryEntity();
-        inventory.setProduct(new ProductEntity());
-        inventory.setId(id);
-        when(inventoryRepo.findById(id)).thenReturn(of(inventory));
 
-        mockMvc.perform(delete("/api/inventory/delete/{id}", id))
+        mockMvc.perform(delete("/api/inventory/delete/{id}", 1L))
                 .andExpect(status().isOk());
-        Mockito.verify(inventoryRepo, times(1)).deleteById(id);
 
+        verify(inventoryService, times(1)).removeById(1L);
     }
 
     @Test
-    void returnAllProductShouldReturnSize1IfWeHave1ProductsInInventory() throws Exception {
-        var inventory = new InventoryEntity();
-        var listOfInventory = List.of(inventory);
-        when(inventoryRepo.findAll()).thenReturn(listOfInventory);
-        when(mapper.mapToInventoryDto(inventory)).thenReturn(new InventoryDto());
+    void returnAllProductShouldReturn200Ok() throws Exception {
 
         mockMvc.perform(get("/api/inventory/products"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", Matchers.hasSize(1)));
+                .andExpect(status().isOk());
 
+        verify(inventoryService, times(1)).getProducts();
     }
 
 }
