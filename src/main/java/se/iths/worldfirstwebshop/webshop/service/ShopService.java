@@ -4,11 +4,10 @@ import org.springframework.stereotype.Service;
 import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
-import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ShopService {
@@ -18,33 +17,34 @@ public class ShopService {
     InventoryRepository inventoryRepo;
 
     public ShopService(Mapper mapper, InventoryRepository inventoryRepo) {
-        this.shop = new Shop();
+        this.shop = new Shop(mapper.mapToInventory(inventoryRepo.findAll()));
         this.mapper = mapper;
         this.inventoryRepo = inventoryRepo;
+
     }
 
     public void addToCart(ProductDto product, int amount) {
-        shop.addToCart(mapper.mapToProduct(product), amount);
+        shop.addToCart(shop.getInventory().getProductInInventory(mapper.mapToProduct(product)), amount);
     }
 
     public void removeFromCart(ProductDto product) {
-        shop.removeFromCart(mapper.mapToProduct(product));
+        shop.removeFromCart(shop.getInventory().getProductInInventory(mapper.mapToProduct(product)));
     }
 
     public void checkout() {
         shop.checkout();
-        var currentInventory = inventoryRepo.findAll();
-        var inventoryAfterPurchase = shop.getInventory().getInventory();
-
-        for (InventoryEntity product : currentInventory)
-            checkIfExistsAndUpdateAmount(inventoryAfterPurchase, product);
-
+        updateInventoryDatabase();
     }
 
-    private static void checkIfExistsAndUpdateAmount(Map<Product, Integer> map, InventoryEntity product) {
-        if (map.containsKey(product.getProduct()))
-            product.setAmount(map.get(product));
+    private void updateInventoryDatabase() {
+        var updatedInventory = shop.getInventory()
+                .getInventory()
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(map -> mapper.mapToEntity(map.getKey()), Map.Entry::getValue));
+
+        inventoryRepo.deleteAll();
+        inventoryRepo.saveAll(mapper.getInventoryEntitiesAsLists(updatedInventory));
 
     }
-
 }
