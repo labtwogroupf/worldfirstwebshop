@@ -1,12 +1,10 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
-import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
+import se.iths.worldfirstwebshop.webshop.service.ProductService;
 
 import java.util.List;
 
@@ -14,28 +12,25 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    ProductRepository repo;
-    Mapper mapper;
+    ProductService service;
 
-    public ProductController(ProductRepository repo, Mapper mapper) {
-        this.repo = repo;
-        this.mapper = mapper;
+    public ProductController(ProductService service) {
+        this.service = service;
     }
 
     @GetMapping
-    List<ProductDto> getAllProducts(){
-        return repo.findAll().stream().map(product -> mapper.mapToDto(product)).toList();
+    List<ProductDto> getAllProducts() {
+        return service.getAllProducts();
     }
 
-
     @GetMapping("/{id}")
-    ProductDto getAProduct(@PathVariable long id) {
-        return mapper.mapToDto(repo.findById(id).orElseThrow());
+    ProductDto getAProduct(@PathVariable Long id) {
+        return service.getAProduct(id);
     }
 
     @PostMapping
     ResponseEntity addProduct(@RequestBody ProductDto product) {
-        repo.save(mapper.mapToEntity(product));
+        service.addProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
