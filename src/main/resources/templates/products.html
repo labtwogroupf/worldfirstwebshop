@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<div th:insert="~{fragments::menu}"></div>
+
+<table>
+    <tr th:each="prods: ${allProducts}">
+        <td th:text="${prods.getId()}"></td>
+        <td th:text="${prods.getName()}"></td>
+        <td th:text="${prods.getPrice() + 'kr'}"></td>
+    </tr>
+</table>
+<div th:insert="~{fragments::footer}"></div>
+</body>
+<body>
+<div th:insert="~{fragments::mainFooter}"></div>
+</body>
+</html>
