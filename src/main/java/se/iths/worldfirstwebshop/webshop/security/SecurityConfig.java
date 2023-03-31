@@ -13,11 +13,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    @Order(2)
+    @Order(1)
     public SecurityFilterChain filterChainForRestApi(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .securityMatcher("/api/**")
+                .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
@@ -25,22 +27,23 @@ public class SecurityConfig {
                 .build();
     }
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity
-//                .csrf()
-//                .ignoringRequestMatchers("/register")
-//                .and()
-//                .authorizeHttpRequests()
-//                .requestMatchers(HttpMethod.POST, "/register").permitAll()
-//                .requestMatchers("/showPersons").authenticated()
-//                .anyRequest().denyAll()
-//                .and()
-//                .formLogin()
-//                .and();
-//
-//        return httpSecurity.build();
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf()
+                .ignoringRequestMatchers("/register")
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST, "/register").permitAll()
+             //   .requestMatchers("/mainSite").authenticated()
+                .anyRequest().denyAll()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/mainSite")
+                .and();
+
+        return httpSecurity.build();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){

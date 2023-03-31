@@ -23,6 +23,7 @@ public class UserCredentialsController {
         UserCredentials user = new UserCredentials();
         user.setName(userDto.getName());
         user.setPassword(encoder.encode(userDto.getPassword()));
+        user.setRole(Role.USER);
 
         if (repository.findByName(user.getName()) != null)
             return ResponseEntity.status(HttpStatus.CONFLICT).build();

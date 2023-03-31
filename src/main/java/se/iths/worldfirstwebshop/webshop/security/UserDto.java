@@ -1,5 +1,7 @@
 package se.iths.worldfirstwebshop.webshop.security;
 
+import java.util.Objects;
+
 public class UserDto {
     String name;
     String password;
@@ -9,7 +11,9 @@ public class UserDto {
         return role;
     }
 
-
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getName() {
         return name;

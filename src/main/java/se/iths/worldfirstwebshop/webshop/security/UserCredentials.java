@@ -23,18 +23,13 @@ public class UserCredentials {
         return role;
     }
 
-    public void setRole(String name) {
-        if (name.equals("admin"))
-            this.role = Role.ADMIN;
-        else
-            this.role = Role.USER;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
-
 
     public void setName(String name) {
         this.name = name;
-        setRole(name);
+
     }
 
     public String getPassword() {
