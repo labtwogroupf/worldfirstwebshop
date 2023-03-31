@@ -1,5 +1,7 @@
 package se.iths.worldfirstwebshop.webshop.product;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
 public class Product {
@@ -24,22 +26,6 @@ public class Product {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public String getIsbn() {

@@ -37,6 +37,7 @@ class ProductServiceTest {
 
         var result = productService.getAProduct(1L);
 
+
         verify(productRepo, times(1)).findById(1L);
         verify(mapper, times(1)).mapToDto(product);
         assertThat(productDto).isEqualTo(result);

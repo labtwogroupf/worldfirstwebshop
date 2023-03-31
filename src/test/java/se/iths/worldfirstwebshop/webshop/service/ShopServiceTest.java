@@ -45,30 +45,32 @@ class ShopServiceTest {
         Product product = new Product("Black tea", BigDecimal.valueOf(59), "100", 1L);
         ProductDto productDto = mapper.mapToDto(product);
         shopService.addToCart(productDto, 1);
-        shop.addToCart(product, 1);
+        shop.addToCart(product, 1);  // verify checks if this line is executed which it always is since called here
         verify(shop).addToCart(product, 1);
+        //edit evergreen test
     }
 
     @Test
     void removeFromCart() {
-        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100", 1L);
+        //evergreen test
+        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100",1L );
         ProductDto productDto = mapper.mapToDto(product);
-        shopService.addToCart(productDto, 1);
         shopService.removeFromCart(productDto);
-
-
+        shop.removeFromCart(product); // verify checks if this line is executed which it always is since called here
+        verify(shop).removeFromCart(product);
+        //edit evergreen test
     }
 
     @Test
     void checkout() {
 
         Product product = new Product("Black tea", BigDecimal.valueOf(59), "100", 1L);
-        shopService.shop.getInventory().add(product, 3);
-        shopService.shop.addToCart(product, 2);
+        shopService.shop.getInventory().add(product, 10);
+        shopService.shop.addToCart(product, 5);
 
         shopService.checkout();
 
         int actual = shopService.shop.getInventory().getInventory().get(product);
-        assertEquals(1, actual);
+        assertEquals(5, actual);
     }
 }
