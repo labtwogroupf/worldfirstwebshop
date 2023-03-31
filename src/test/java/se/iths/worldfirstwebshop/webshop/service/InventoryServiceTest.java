@@ -57,50 +57,50 @@ class InventoryServiceTest {
         verify(inventoryRepo, times(1)).deleteAll();
 
     }
+
     @Test
-    void removeByIdRemovesFromDatabase(){
+    void removeByIdRemovesFromDatabase() {
 
         when(inventoryRepo.findById(1L)).thenReturn(Optional.of(new InventoryEntity()));
         inventoryService.removeById(1L);
 
         verify(inventoryRepo, times(1)).findById(1L);
-        verify(inventoryRepo, times(1)). deleteById(1L);
+        verify(inventoryRepo, times(1)).deleteById(1L);
     }
-    
-    @Test
-    void updateWhenSoldMethodsUpdateDatabase(){
-
-            when(inventoryRepo.findById(1L)).thenReturn(Optional.of(new InventoryEntity()));
-
-            inventoryService.updateAddToStock(1L, 5);
-
-            verify(inventoryRepo).findById(1L);
-
-            verify(inventoryRepo).save((any(InventoryEntity.class)));
-
-        }
 
     @Test
-    void updateAddToStockMethodsUpdateDatabase(){
+    void updateWhenSoldMethodsUpdateDatabase() {
 
-            when(inventoryRepo.findById(1L)).thenReturn(Optional.of(new InventoryEntity()));
+        when(inventoryRepo.findById(1L)).thenReturn(Optional.of(new InventoryEntity()));
 
-            inventoryService.updateWhenSold(1L, 5);
+        inventoryService.updateAddToStock(1L, 5);
 
-            verify(inventoryRepo).findById(1L);
+        verify(inventoryRepo).findById(1L);
 
-            verify(inventoryRepo).save((any(InventoryEntity.class)));
+        verify(inventoryRepo).save((any(InventoryEntity.class)));
 
-        }
+    }
 
-        @Test
-        void addProductSavesToDatabase(){
+    @Test
+    void updateAddToStockMethodsUpdateDatabase() {
 
-            when(productRepository.findById(1L)).thenReturn(Optional.of(new ProductEntity()));
+        when(inventoryRepo.findById(1L)).thenReturn(Optional.of(new InventoryEntity()));
 
-            inventoryService.addProduct(1L, 10);
-            verify(inventoryRepo, times(1)).save(any(InventoryEntity.class));
-        }
+        inventoryService.updateWhenSold(1L, 5);
 
+        verify(inventoryRepo).findById(1L);
+
+        verify(inventoryRepo).save((any(InventoryEntity.class)));
+
+    }
+
+    @Test
+    void addProductSavesToDatabase() {
+
+        when(productRepository.findById(1L)).thenReturn(Optional.of(new ProductEntity()));
+
+        inventoryService.addProduct(1L, 10);
+        verify(inventoryRepo, times(1)).save(any(InventoryEntity.class));
+    }
 
 }

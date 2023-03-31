@@ -1,7 +1,5 @@
 package se.iths.worldfirstwebshop.webshop.product;
 
-import lombok.Getter;
-
 import java.math.BigDecimal;
 
 public class Product {

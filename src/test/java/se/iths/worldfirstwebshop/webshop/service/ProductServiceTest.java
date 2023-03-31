@@ -11,6 +11,7 @@ import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 @WebMvcTest(controllers = ProductService.class)
 class ProductServiceTest {
     @Autowired
@@ -27,9 +29,8 @@ class ProductServiceTest {
     @MockBean
     Mapper mapper;
 
-
     @Test
-    void getProductByIdReturnsAProductDto(){
+    void getProductByIdReturnsAProductDto() {
         var product = new ProductEntity();
         var productDto = new ProductDto();
         when(productRepo.findById(1L)).thenReturn(Optional.of(product));
@@ -37,14 +38,13 @@ class ProductServiceTest {
 
         var result = productService.getAProduct(1L);
 
-
         verify(productRepo, times(1)).findById(1L);
         verify(mapper, times(1)).mapToDto(product);
         assertThat(productDto).isEqualTo(result);
     }
 
     @Test
-    void addingProductSavesToRepo(){
+    void addingProductSavesToRepo() {
         var productDto = new ProductDto();
         var entity = new ProductEntity();
         when(mapper.mapToEntity(productDto)).thenReturn(entity);
@@ -56,7 +56,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void getAllProductsReturnsListOfDto(){
+    void getAllProductsReturnsListOfDto() {
         var product = new ProductEntity();
         var productDto = new ProductDto();
         when(productRepo.findAll()).thenReturn(List.of(product));
@@ -66,6 +66,6 @@ class ProductServiceTest {
 
         verify(productRepo, times(1)).findAll();
         verify(mapper, times(1)).mapToDto(product);
-        assertThat(result.contains(productDto)).isTrue();
+        assertThat(result).contains(productDto);
     }
 }

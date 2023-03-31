@@ -53,7 +53,7 @@ class ShopServiceTest {
     @Test
     void removeFromCart() {
         //evergreen test
-        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100",1L );
+        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100", 1L);
         ProductDto productDto = mapper.mapToDto(product);
         shopService.removeFromCart(productDto);
         shop.removeFromCart(product); // verify checks if this line is executed which it always is since called here

@@ -1,8 +1,9 @@
 package se.iths.worldfirstwebshop.webshop.dto;
 
 import lombok.Getter;
-import lombok.Setter;
+
 import org.jetbrains.annotations.NotNull;
+
 @Getter
 
 public class InventoryDto {
