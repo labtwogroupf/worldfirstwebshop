@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 public class SecurityConfig {
 
@@ -19,7 +20,12 @@ public class SecurityConfig {
                 .securityMatcher("/api/**")
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers("/api/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll() // Allow all users to access the /api/products endpoints
+                .requestMatchers(HttpMethod.GET, "/api/inventory/**").permitAll()
+                .requestMatchers("/api/inventory/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/products/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/shop/**").hasAuthority("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
@@ -36,12 +42,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers("/mainSite").permitAll()
-                .requestMatchers("/showInventory").authenticated()
-                .requestMatchers("/showProducts").hasRole("ADMIN") //roll dont work yet
+                .requestMatchers("/showProducts").authenticated()
+                .requestMatchers("/showInventory").hasAuthority("ROLE_ADMIN") // Use hasAuthority() with the complete role name
                 .anyRequest().denyAll()
                 .and()
                 .formLogin(); //Used by Browser
-              //  .httpBasic(); //Used by Insomnia
+        //  .httpBasic(); //Used by Insomnia
 
         return httpSecurity.build();
     }

@@ -8,7 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import se.iths.worldfirstwebshop.webshop.security.UserCredentials;
 import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 
-import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN;
+
+import static se.iths.worldfirstwebshop.webshop.security.Role.ROLE_ADMIN;
 
 @SpringBootApplication
 public class WorldfirstwebshopApplication {
@@ -30,7 +31,7 @@ public class WorldfirstwebshopApplication {
                     var admin = new UserCredentials();
                     admin.setName("admin");
                     admin.setPassword(passwordEncoder.encode("password"));
-                    admin.setRole(ADMIN);
+                    admin.setRole(ROLE_ADMIN);
                     repo.save(admin);
                 }
             }

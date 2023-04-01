@@ -27,6 +27,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         UserCredentials userCredentials = repository.findByName(username);
         if (userCredentials == null)
             throw new UsernameNotFoundException("username not found");
-        return new User(userCredentials.getName(),userCredentials.getPassword(), Collections.singleton(userCredentials.getRole()));
+        return new User(userCredentials.getName(),userCredentials.getPassword(), userCredentials.getGrantedAuthorities());
     }
 }

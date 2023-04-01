@@ -1,6 +1,12 @@
 package se.iths.worldfirstwebshop.webshop.security;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class UserCredentials {
@@ -48,9 +54,9 @@ public class UserCredentials {
         return id;
     }
 
-
-
-
-
-
+    public List<GrantedAuthority> getGrantedAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(getRole().name()));
+        return authorities;
+    }
 }
