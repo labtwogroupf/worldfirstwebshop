@@ -6,13 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Set;
-
-/*** This class is for doing own implementation of UserDetailsService
- * When commented out, the default implementation is used and password is shown in console.
- * ***/
-
 @Service
 public class DatabaseUserDetailsService implements UserDetailsService {
 
