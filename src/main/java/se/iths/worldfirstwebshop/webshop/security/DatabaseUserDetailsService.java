@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Set;
 
 /*** This class is for doing own implementation of UserDetailsService
@@ -26,9 +27,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         UserCredentials userCredentials = repository.findByName(username);
         if (userCredentials == null)
             throw new UsernameNotFoundException("username not found");
-
-        UserDetails userDetails = new User(userCredentials.getName(),userCredentials.getPassword(), Set.of());
-
-        return userDetails;
+        return new User(userCredentials.getName(),userCredentials.getPassword(), Collections.singleton(userCredentials.getRole()));
     }
 }

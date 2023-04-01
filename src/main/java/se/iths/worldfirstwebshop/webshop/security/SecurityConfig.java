@@ -34,13 +34,14 @@ public class SecurityConfig {
                 .ignoringRequestMatchers("/register")
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/register").permitAll()
-             //   .requestMatchers("/mainSite").authenticated()
+                .requestMatchers("/register").permitAll()
+                .requestMatchers("/mainSite").permitAll()
+                .requestMatchers("/showInventory").authenticated()
+                .requestMatchers("/showProducts").hasRole("ADMIN") //roll dont work yet
                 .anyRequest().denyAll()
                 .and()
-                .formLogin()
-                .defaultSuccessUrl("/mainSite")
-                .and();
+                .formLogin(); //Used by Browser
+              //  .httpBasic(); //Used by Insomnia
 
         return httpSecurity.build();
     }
