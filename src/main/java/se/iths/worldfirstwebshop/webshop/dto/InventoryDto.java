@@ -1,6 +1,10 @@
 package se.iths.worldfirstwebshop.webshop.dto;
 
+import lombok.Getter;
+
 import org.jetbrains.annotations.NotNull;
+
+@Getter
 
 public class InventoryDto {
 
@@ -17,19 +21,4 @@ public class InventoryDto {
     public InventoryDto() {
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public ProductDto getProduct() {
-        return product;
-    }
-
-    public void setProduct(ProductDto product) {
-        this.product = product;
-    }
 }

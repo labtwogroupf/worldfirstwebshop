@@ -29,21 +29,22 @@ class ShopControllerTest {
     @MockBean
     ShopService shopService;
 
+
     @Test
     void shouldReturnStatusCreatedWhenAddingToCart() throws Exception {
-            String json = """
-             {
-             "id":1,
-             "name":"Black tea",
-             "price":59,
-             "isbn":"100"
-             }
-             """;
+        String json = """
+                {
+                "id":1,
+                "name":"Black tea",
+                "price":59,
+                "isbn":"100"
+                }
+                """;
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/shop/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json)
-                .param("amount", "1"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                        .param("amount", "1"))
                 .andExpect(status().isCreated());
 
         verify(shopService).addToCart(any(ProductDto.class), any(Integer.class));
@@ -52,13 +53,13 @@ class ShopControllerTest {
     @Test
     void shouldReturnStatusCreatedWhenRemovingFromCart() throws Exception {
         String json = """
-             {
-             "id":1,
-             "name":"Black tea",
-             "price":59,
-             "isbn":"100"
-             }
-             """;
+                {
+                "id":1,
+                "name":"Black tea",
+                "price":59,
+                "isbn":"100"
+                }
+                """;
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/shop/remove")
                         .contentType(MediaType.APPLICATION_JSON)

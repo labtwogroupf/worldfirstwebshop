@@ -10,10 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CartTest {
 
     Cart products = new Cart();
-
+    Product product = new Product("Svart te", BigDecimal.ONE, "1234");
     @Test
     void having3InCartAndAdding3MoreShouldAddTotalAmountTo6() {
-        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
 
         products.add(product, 3);
         products.add(product, 3);
@@ -25,7 +24,6 @@ class CartTest {
     @Test
     void adding3ShouldReturn3InTotalAmountIfThereIsAnEmptyCart() {
 
-        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
 
         products.add(product, 3);
 
@@ -35,12 +33,12 @@ class CartTest {
 
     @Test
     void removingMoreThanIsInCartRemovesProduct() {
+        var prod = new Product(product);
 
-        Product product = new Product("Svart te", BigDecimal.ONE, "1234");
-        products.add(product, 5);
-        products.remove(product, 10);
+        products.add(prod, 5);
+        products.remove(prod, 10);
 
-        assertThat(products.getProducts().containsKey(product)).isFalse();
+        assertThat(products.getProducts().containsKey(prod)).isFalse();
     }
 
 }
