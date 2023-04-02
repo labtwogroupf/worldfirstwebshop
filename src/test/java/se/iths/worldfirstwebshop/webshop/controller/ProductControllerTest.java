@@ -2,7 +2,6 @@ package se.iths.worldfirstwebshop.webshop.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -10,7 +9,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 import se.iths.worldfirstwebshop.webshop.service.ProductService;
 
 import static org.mockito.Mockito.*;
@@ -27,12 +25,8 @@ class ProductControllerTest {
     Mapper mapper;
     @MockBean
     ProductService productService;
-    @MockBean
-    CommandLineRunner commandLineRunner;
-
 
     @Test
-    @WithMockUser(roles="ADMIN")
     void getAllProductsShouldReturnListOfProducts() throws Exception {
         mockMvc.perform(get("/api/products"))
                 .andExpect(status().isOk());
@@ -42,7 +36,6 @@ class ProductControllerTest {
     }
 
     @Test
-    @WithMockUser(roles="ADMIN")
     void getAProductShouldReturnAProduct() throws Exception {
 
         mockMvc.perform(get("/api/products/{id}", 1))
@@ -52,7 +45,6 @@ class ProductControllerTest {
     }
 
     @Test
-    @WithMockUser(roles="ADMIN")
     void addProductShouldAddProduct() throws Exception {
         String json = """
                 {
