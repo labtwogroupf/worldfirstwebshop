@@ -19,8 +19,6 @@ public class WorldfirstwebshopApplication {
     }
 
 
-
-
         @Bean
         CommandLineRunner runOnStartUp(UserCredentialsRepository repo, PasswordEncoder passwordEncoder) {
         return new CommandLineRunner() {
@@ -37,5 +35,4 @@ public class WorldfirstwebshopApplication {
             }
         };
     }
-
 }

@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WithMockUser(roles = "ADMIN")
+@WithMockUser(authorities = "ADMIN")
 @WebMvcTest(ShopController.class)
 @ContextConfiguration(classes = {SecurityConfig.class, ShopController.class})
 class ShopControllerTest {

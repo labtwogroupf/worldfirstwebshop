@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(InventoryController.class)
-@WithMockUser(roles = "ADMIN")
+@WithMockUser(authorities = "ADMIN")
 @ContextConfiguration(classes = {SecurityConfig.class, InventoryController.class})
 public class InventoryControllerTest {
 

@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(ProductController.class)
-@WithMockUser(roles = "ADMIN")
+@WithMockUser(authorities = "ADMIN")
 @ContextConfiguration(classes = {SecurityConfig.class, ProductController.class})
 class ProductControllerTest {
 
