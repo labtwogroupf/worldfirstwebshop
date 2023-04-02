@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserCredentialsController {
 
+    public static Integer ZERO = 0;
+
     private PasswordEncoder encoder;
     private UserCredentialsRepository repository;
 
@@ -23,7 +25,7 @@ public class UserCredentialsController {
         UserCredentials user = new UserCredentials();
         user.setName(userDto.getName());
         user.setPassword(encoder.encode(userDto.getPassword()));
-        user.setRole(Role.ROLE_USER);
+        user.setRole(Role.USER);
 
         if (repository.findByName(user.getName()) != null)
             return ResponseEntity.status(HttpStatus.CONFLICT).build();

@@ -1,10 +1,15 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
@@ -12,6 +17,8 @@ import se.iths.worldfirstwebshop.webshop.service.InventoryService;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,9 +28,10 @@ public class InventoryControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
+    private WebApplicationContext context;
+    @Autowired
     private InventoryController inventoryController;
-    @MockBean
-    private InventoryRepository inventoryRepo;
+    @Autowired
     @MockBean
     private ProductRepository productRepository;
     @MockBean
@@ -34,10 +42,16 @@ public class InventoryControllerTest {
     private ProductController productController;
     @MockBean
     private ShopController shopController;
+    @MockBean
+    private CommandLineRunner commandLineRunner;
+    @MockBean
+    InventoryRepository inventoryRepository;
+
+
 
     @Test
     void removingFromStockShouldReturn200ok() throws Exception {
-        mockMvc.perform(put("/api/inventory/subtract/{id}", 1L)
+        mockMvc.perform(put("/api/inventory/subtract/{id}", 1L)//.with(user("user"))
                         .param("amount", String.valueOf(10)))
                 .andExpect(status().isOk());
 
@@ -47,7 +61,6 @@ public class InventoryControllerTest {
 
     @Test
     void addingToStockShouldReturn200ok() throws Exception {
-
         mockMvc.perform(put("/api/inventory/add/{id}", 1L)
                         .param("amount", String.valueOf(10)))
                         .andExpect(status().isOk());
