@@ -22,7 +22,6 @@ public class ShopController {
     @PutMapping("/add")
     ResponseEntity addToCart(@RequestBody ProductDto product, @RequestParam int amount) {
         publisher.addToQueue(product, amount);
-        //service.addToCart(product, amount);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
