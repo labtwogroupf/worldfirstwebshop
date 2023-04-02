@@ -1,66 +1,35 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
-import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.security.SecurityConfig;
-import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
-import se.iths.worldfirstwebshop.webshop.storage.Cart;
-import se.iths.worldfirstwebshop.webshop.storage.Inventory;
-
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WithMockUser(roles = "ADMIN")
 @WebMvcTest(ShopController.class)
 @ContextConfiguration(classes = {SecurityConfig.class, ShopController.class})
 class ShopControllerTest {
 
     @Autowired
-    ShopController shopController;
-    @Autowired
     MockMvc mockMvc;
     @MockBean
     ShopService shopService;
-    @MockBean
-    InventoryRepository inventoryRepo;
-    @MockBean
-    Inventory inventory;
-    @SpyBean
-    Cart cart;
-    @SpyBean
-    Mapper mapper;
-    @SpyBean
-    Shop shop;
-    @MockBean
-    UserCredentialsRepository userCredentialsRepository;
-    @MockBean
-    CommandLineRunner commandLineRunner;
-
 
     @Test
-    @WithMockUser(roles = "ADMIN")
     void shouldReturnStatusCreatedWhenAddingToCart() throws Exception {
             String json = """
              {
@@ -81,7 +50,6 @@ class ShopControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
     void shouldReturnStatusCreatedWhenRemovingFromCart() throws Exception {
         String json = """
              {
@@ -102,7 +70,6 @@ class ShopControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
     void shouldCheckoutAndReturnStatusOk() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/shop/checkout")

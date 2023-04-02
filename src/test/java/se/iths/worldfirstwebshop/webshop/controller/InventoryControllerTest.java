@@ -1,41 +1,34 @@
 package se.iths.worldfirstwebshop.webshop.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
+import se.iths.worldfirstwebshop.webshop.security.SecurityConfig;
 import se.iths.worldfirstwebshop.webshop.service.InventoryService;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = InventoryController.class)
+@WebMvcTest(InventoryController.class)
+@WithMockUser(roles = "ADMIN")
+@ContextConfiguration(classes = {SecurityConfig.class, InventoryController.class})
 public class InventoryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private WebApplicationContext context;
-    @Autowired
     private InventoryController inventoryController;
     @Autowired
     @MockBean
     private ProductRepository productRepository;
-    @MockBean
-    private Mapper mapper;
     @MockBean
     private InventoryService inventoryService;
     @MockBean
@@ -43,10 +36,7 @@ public class InventoryControllerTest {
     @MockBean
     private ShopController shopController;
     @MockBean
-    private CommandLineRunner commandLineRunner;
-    @MockBean
     InventoryRepository inventoryRepository;
-
 
 
     @Test
