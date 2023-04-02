@@ -62,7 +62,6 @@
 //        verify(shop).removeFromCart(product);
 //    }
 //
-//    //TODO: Comment in when checkout is implemented properly
 //    @Test
 //    void checkout() {
 //

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
@@ -11,6 +12,7 @@ import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
+import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 import se.iths.worldfirstwebshop.webshop.storage.Inventory;
 import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 
@@ -33,6 +35,10 @@ class InventoryServiceTest {
     ProductRepository productRepository;
     @MockBean
     Mapper mapper;
+    @MockBean
+    UserCredentialsRepository userCredentialsRepository;
+    @MockBean
+    PasswordEncoder passwordEncoder;
 
     @Test
     void getProductReturnsListOfDtos() {
