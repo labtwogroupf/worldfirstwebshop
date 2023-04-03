@@ -10,7 +10,7 @@
             font-size: medium;
         }
         .title_box{
-            border:5px solid darkgreen;
+            border:5px outset darkgreen;
             border-radius: 4px;
             width: fit-content;
             padding: 0.5em;
@@ -24,10 +24,11 @@
 <div th:insert="~{fragments::menu5}"></div>
 <div class="title_box">
     <table>
-        <tr th:each="prods: ${allProducts}">
-            <td th:text="${prods.getId()}"></td>
-            <td th:text="${prods.getName()}"></td>
-            <td th:text="${prods.getPrice()}"></td>
+        <tr th:each="invens: ${allInventories}">
+            <td th:text="${'ID: ' + invens.getProduct().getId()}"></td>
+            <td th:text="${invens.getProduct().getName()}"></td>
+            <td th:text="${invens.getProduct().getPrice() + 'kr'}"></td>
+            <td th:text="${'Amount: ' + invens.getAmount() + 'st'}"></td>
         </tr>
     </table>
 </div>
