@@ -6,11 +6,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.product.ProductEntity;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
+import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,6 +30,10 @@ class ProductServiceTest {
     ProductRepository productRepo;
     @MockBean
     Mapper mapper;
+    @MockBean
+    UserCredentialsRepository userCredentialsRepository;
+    @MockBean
+    PasswordEncoder passwordEncoder;
 
     @Test
     void getProductByIdReturnsAProductDto() {

@@ -37,5 +37,4 @@ public class ShopController {
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
-
 }
