@@ -71,7 +71,7 @@ public class WebController {
     }
     @PostMapping("/addProductToInventory")
     String addProductToInventory(Model model, InventoryEntity inventoryEntity){
-        model.addAttribute("products", inventoryEntity.getAmount());
+        model.addAttribute("amount", inventoryEntity.getAmount());
         return "inventories";
     }
 
