@@ -13,7 +13,6 @@
     <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>worldfirstwebshop</name>
-    <url>http://WorldFirstWebShop.org</url>
     <description>worldfirstwebshop</description>
     <properties>
         <java.version>19</java.version>
@@ -70,7 +69,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.3</version>
+            <version>2.13.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
