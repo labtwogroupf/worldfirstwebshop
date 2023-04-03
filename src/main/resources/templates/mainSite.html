@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <style>
+    * {
+      font-family: Arial,sans-serif;
+    }
+    h1 {
+      color:darkgreen;
+      font-size: medium;
+    }
+    .title_box{
+      border:5px solid darkgreen;
+      border-radius: 4px;
+      width: fit-content;
+      padding: 0.5em;
+    }
+
+  </style>
   <meta charset="UTF-8">
   <title>WorldsFirstWebShop</title>
 </head>
 <body>
+<div class="title_box">
 <div th:insert="~{fragments::menu2}"></div>
-<div th:insert="~{fragments::footer}"></div>
-<div th:insert="~{fragments::footer1}"></div>
-<div th:insert="~{fragments::footer2}"></div>
-<div th:insert="~{fragments::footer3}"></div>
+<div th:insert="~{fragments::inventory}"></div>
+<div th:insert="~{fragments::products}"></div>
+<div th:insert="~{fragments::addProducts}"></div>
+<div th:insert="~{fragments::addToInv}"></div>
+</div>
 </body>
 </html>

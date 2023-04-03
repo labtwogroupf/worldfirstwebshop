@@ -39,17 +39,17 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf()
-                .ignoringRequestMatchers("/register")
+                .ignoringRequestMatchers("/**")
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/register").permitAll()
-                .requestMatchers("/mainSite").permitAll()
-                .requestMatchers("/showProducts").authenticated()
-                .requestMatchers("/showInventory").authenticated()
+                .requestMatchers("/**").permitAll()
+        //        .requestMatchers("/mainSite").permitAll()
+        //        .requestMatchers("/showProducts").authenticated()
+        //        .requestMatchers("/showInventory").authenticated()
                 .anyRequest().denyAll()
                 .and()
                 .formLogin(); //used by Browser
-        //  .httpBasic(); //used by Insomnia
+         // .httpBasic(); //used by Insomnia
 
         return httpSecurity.build();
     }

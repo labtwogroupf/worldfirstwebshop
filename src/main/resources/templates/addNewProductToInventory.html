@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <style>
+        * {
+            font-family: Arial,sans-serif;
+        }
+        h1 {
+            color:darkgreen;
+            font-size: medium;
+        }
+        .title_box{
+            border:5px solid darkgreen;
+            border-radius: 4px;
+            width: fit-content;
+            padding: 0.5em;
+        }
+
+    </style>
     <meta charset="UTF-8">
     <title>Add to inventory</title>
 </head>
 <body>
 <div th:insert="~{fragments::menu4}"></div>
+<div class="title_box">
 <table>
     <tr th:each="prods: ${allProducts}">
         <td th:text="${prods.getId()}"></td>
@@ -13,6 +30,7 @@
         <td th:text="${prods.getPrice() + 'kr'}"></td>
     </tr>
 </table>
+</div>
 
 <div th:fragment="content">
 
@@ -23,19 +41,23 @@
             <div class="container mt-3 mb-3">
 
                 <div class="mb-3">
+                    <h1>
                     <label for="productIdInput">Product Id</label>
                     <input th:field="*{id}" type="text" class="form-control" id="productIdInput" aria-describedby="productIdHelp" placeholder="Enter product id">
+                    </h1>
                 </div>
 
+
                 <div class="mb-3">
+                    <h1>
                     <label for="amountInput">Amount</label>
                     <input type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
+                    </h1>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add to inventory</button>
 
-                <div th:fragment="mainFooter">
-                    <a href="http://localhost:8080/mainSite">WorldsFirstWebShop</a></div>
+                <div th:insert="~{fragments::mainSite}"></div>
 
             </div>
 

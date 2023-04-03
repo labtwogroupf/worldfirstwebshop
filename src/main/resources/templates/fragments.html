@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <style>
+    * { 
+      font-family: Arial,sans-serif;
+    }
+    h1 {
+      color:darkgreen;
+    }
+    h2 {
+      color:darkred;
+      font-size: large;
+    }
+
+  </style>
   <meta charset="UTF-8">
   <title></title>
 </head>
 <body>
-<div th:fragment="mainFooter">
-  <a href="http://localhost:8080/mainSite">WorldsFirstWebShop</a></div>
-<div th:fragment="footer">
-  <a href="http://localhost:8080/showInventory">Inventory</a></div>
-<div th:fragment="footer1">
-  <a href="http://localhost:8080/showProducts">Products</a></div>
-<div th:fragment="footer2">
-  <a href="http://localhost:8080/showProductForm">Add Products</a></div>
-<div th:fragment="footer3">
-  <a href="http://localhost:8080/addToInventory">Add Product to inventory</a></div>
-<div th:fragment="menu">Products</div>
-<div th:fragment="menu1">Inventory</div>
-<div th:fragment="menu2">WorldsFirstWebShop</div>
-<div th:fragment="menu3">Add Product</div>
-<div th:fragment="menu4">Add Product to Inventory</div>
+<div th:fragment="mainSite">
+  <a href="http://localhost:8080/mainSite"><h1>Home</h1></a></div>
+<div th:fragment="inventory">
+  <a href="http://localhost:8080/showInventory"><h1>Inventory</h1></a></div>
+<div th:fragment="products">
+  <a href="http://localhost:8080/showProducts"><h1>Products</h1></a></div>
+<div th:fragment="addProducts">
+  <a href="http://localhost:8080/showProductForm"><h1>Add Products</h1></a></div>
+<div th:fragment="addToInv">
+  <a href="http://localhost:8080/addToInventory"><h1>Add Product to inventory</h1></a></div>
+<div th:fragment="menu"><h2>Products</h2></div>
+<div th:fragment="menu1"><h2>Inventory</h2></div>
+<div th:fragment="menu2"><h2>WorldsFirstWebShop</h2></div>
+<div th:fragment="menu3"><h2>Add Product</h2></div>
+<div th:fragment="menu4"><h2>Add Product to Inventory</h2></div>
 
 </body>
 </html>
