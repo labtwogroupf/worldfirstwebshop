@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add to inventory</title>
+</head>
+<body>
+<div th:insert="~{fragments::menu4}"></div>
+<table>
+    <tr th:each="prods: ${allProducts}">
+        <td th:text="${prods.getId()}"></td>
+        <td th:text="${prods.getName()}"></td>
+        <td th:text="${prods.getPrice() + 'kr'}"></td>
+    </tr>
+</table>
+
+<div th:fragment="content">
+
+
+    <div class="container mt-3 mb-3">
+
+            <form th:action="@{/addToInventory}" action="#" method="get" th:object="${product}">
+            <div class="container mt-3 mb-3">
+
+                <div class="mb-3">
+                    <label for="productIdInput">Product Id</label>
+                    <input th:field="*{id}" type="text" class="form-control" id="productIdInput" aria-describedby="productIdHelp" placeholder="Enter product id">
+                </div>
+
+                <div class="mb-3">
+                    <label for="amountInput">Amount</label>
+                    <input type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add to inventory</button>
+
+                <div th:fragment="mainFooter">
+                    <a href="http://localhost:8080/mainSite">WorldsFirstWebShop</a></div>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

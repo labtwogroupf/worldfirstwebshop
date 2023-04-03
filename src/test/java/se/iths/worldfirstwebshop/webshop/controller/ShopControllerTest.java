@@ -13,6 +13,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.security.SecurityConfig;
+import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
+import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
+import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +31,19 @@ class ShopControllerTest {
     MockMvc mockMvc;
     @MockBean
     ShopService shopService;
+
+    @MockBean
+    InventoryRepository inventoryRepo;
+    @MockBean
+    Inventory inventory;
+    @SpyBean
+    Cart cart;
+    @SpyBean
+    Mapper mapper;
+    @SpyBean
+    Shop shop;
+    @MockBean
+    Publisher publisher;
 
 
     @Test
@@ -47,7 +63,7 @@ class ShopControllerTest {
                         .param("amount", "1"))
                 .andExpect(status().isCreated());
 
-        verify(shopService).addToCart(any(ProductDto.class), any(Integer.class));
+        verify(publisher).addToQueue(any(ProductDto.class), any(Integer.class));
     }
 
     @Test
