@@ -38,27 +38,25 @@
 
     <div class="container mt-3 mb-3">
 
-        <form th:action="@{/addToCart}" action="#" method="get" th:object="${product}">
-            <div class="container mt-3 mb-3">
+        <form th:action="@{/addToCart}" action="#" method="post" th:object="${product}">
 
-                <div class="mb-3">
-                    <h1>
-                        <label for="productIdInput">Product Id</label>
-                        <input th:field="*{id}" type="text" class="form-control" id="productIdInput" aria-describedby="productIdHelp" placeholder="Enter product id">
-                    </h1>
-                </div>
-
-                <div class="mb-3">
-                    <h1>
-                        <label for="amountInput">Amount</label>
-                        <input type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
-                    </h1>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Add to cart</button>
-
-                <div th:insert="~{fragments::mainSite}"></div>
+            <div class="mb-3">
+                <h1>
+                    <label for="productIdInput">Product Id</label>
+                    <input th:field="*{id}" type="text" class="form-control" id="productIdInput" aria-describedby="productIdHelp" placeholder="Enter product id">
+                </h1>
             </div>
+
+            <div class="mb-3">
+                <h1>
+                    <label for="amountInput">Amount</label>
+                    <input th:object="${inventory}" th:field="*{amount}" type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
+                </h1>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+
+            <div th:insert="~{fragments::mainSite}"></div>
         </form>
     </div>
 </div>

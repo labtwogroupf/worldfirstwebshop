@@ -31,14 +31,9 @@
     </tr>
 </table>
 </div>
-
-<div th:fragment="content">
-
-
     <div class="container mt-3 mb-3">
 
-            <form th:action="@{/addToInventory}" action="#" method="get" th:object="${product}">
-            <div class="container mt-3 mb-3">
+            <form th:action="@{/addProductToInventory}" action="#" method="post" th:object="${product}">
 
                 <div class="mb-3">
                     <h1>
@@ -47,23 +42,20 @@
                     </h1>
                 </div>
 
-
                 <div class="mb-3">
                     <h1>
                     <label for="amountInput">Amount</label>
-                    <input type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
+                    <input th:object="${inventory}" th:field="*{amount}" type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
                     </h1>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add to inventory</button>
 
                 <div th:insert="~{fragments::mainSite}"></div>
-
-            </div>
-
         </form>
 
+
     </div>
-</div>
+
 </body>
 </html>
