@@ -48,7 +48,7 @@ class ShopServiceTest {
                 new InventoryEntity(product, 3));
         when(inventoryRepo.findAll()).thenReturn(currentInventory);
 
-        shop.getInventory().add(product, 3);
+        shop.getInventory().add(product, 0);
         shop.addToCart(product, 2);
 
         shopService.checkout();
