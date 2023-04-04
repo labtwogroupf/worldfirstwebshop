@@ -16,10 +16,10 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
 
 @WebMvcTest(ProductController.class)
-@WithMockUser(authorities = "ADMIN")
+@WithMockUser(authorities = ADMIN_AUTHORITY)
 @ContextConfiguration(classes = {SecurityConfig.class, ProductController.class})
 class ProductControllerTest {
 
@@ -27,6 +27,7 @@ class ProductControllerTest {
     MockMvc mockMvc;
     @MockBean
     ProductService productService;
+
 
     @Test
     void getAllProductsShouldReturnListOfProducts() throws Exception {

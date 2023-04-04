@@ -21,21 +21,21 @@ public class Mapper {
     }
 
     public ProductEntity mapToEntity(Product product) {
-        var productE = new ProductEntity();
-        productE.setName(product.getName());
-        productE.setIsbn(product.getIsbn());
-        productE.setPrice(product.getPrice());
-        productE.setId(product.getId());
-        return productE;
+        var productEntity = new ProductEntity();
+        productEntity.setName(product.getName());
+        productEntity.setIsbn(product.getIsbn());
+        productEntity.setPrice(product.getPrice());
+        productEntity.setId(product.getId());
+        return productEntity;
     }
 
     public ProductEntity mapToEntity(ProductDto product) {
-        var productE = new ProductEntity();
-        productE.setName(product.getName());
-        productE.setIsbn(product.getIsbn());
-        productE.setPrice(product.getPrice());
-        productE.setId(product.getId());
-        return productE;
+        var productEntity = new ProductEntity();
+        productEntity.setName(product.getName());
+        productEntity.setIsbn(product.getIsbn());
+        productEntity.setPrice(product.getPrice());
+        productEntity.setId(product.getId());
+        return productEntity;
     }
 
     public Product mapToProduct(ProductEntity product) {
@@ -81,5 +81,37 @@ public class Mapper {
     private Function<InventoryEntity, Product> mapToProduct() {
         return inventoryEntity -> mapToProduct(inventoryEntity.getProduct());
     }
+
+
+
+    public class ProductCartDto {
+        private Long id;
+        private String name;
+        // Add other fields if necessary
+
+        public ProductCartDto(Long id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+
+
 
 }

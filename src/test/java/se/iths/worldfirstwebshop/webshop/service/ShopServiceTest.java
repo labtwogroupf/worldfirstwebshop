@@ -2,6 +2,7 @@
 //
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.CommandLineRunner;
 //import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
 //import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -12,14 +13,16 @@
 //import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 //import se.iths.worldfirstwebshop.webshop.product.Product;
 //import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
+//import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 //import se.iths.worldfirstwebshop.webshop.storage.Cart;
 //import se.iths.worldfirstwebshop.webshop.storage.Inventory;
-//
+//import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 //
 //import java.math.BigDecimal;
 //import java.util.List;
 //
 //import static org.junit.jupiter.api.Assertions.*;
+//import static org.mockito.ArgumentMatchers.any;
 //import static org.mockito.Mockito.verify;
 //import static org.mockito.Mockito.when;
 //
@@ -43,14 +46,19 @@
 //Cart cart;
 //@MockBean
 //InventoryController inventoryController;
+//@MockBean
+//UserCredentialsRepository userCredentialsRepository;
+//@MockBean
+//CommandLineRunner commandLineRunner;
 //
 //    @Test
 //    void addToCart() {
 //        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100",1L );
 //        ProductDto productDto = mapper.mapToDto(product);
+//        when(shop.getInventory().getProductInInventory(any(Product.class))).thenReturn(product);
+//        when(shop.getInventory().getInventory()).thenReturn(inventory.getInventory());
 //        shopService.addToCart(productDto, 1);
-//        shop.addToCart(product,1);
-//        verify(shop).addToCart(product,1);
+//        verify(shop).addToCart(any(Product.class), any(Integer.class));
 //    }
 //
 //    @Test
