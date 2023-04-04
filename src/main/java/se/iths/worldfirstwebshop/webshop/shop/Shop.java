@@ -1,4 +1,4 @@
-package se.iths.worldfirstwebshop.webshop.access;
+package se.iths.worldfirstwebshop.webshop.shop;
 
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.storage.Cart;
@@ -35,7 +35,6 @@ public class Shop {
 
     public void removeFromCart(Product product) {
         cart.remove(product, -1);
-
     }
 
     private boolean checkIfInStock(Product product, int amount) {

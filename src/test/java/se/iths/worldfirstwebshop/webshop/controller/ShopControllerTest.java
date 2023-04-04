@@ -16,17 +16,20 @@ import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.security.SecurityConfig;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
-import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
+import se.iths.worldfirstwebshop.webshop.messagequeue.Publisher;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
+
+import se.iths.worldfirstwebshop.webshop.shop.Shop;
 import se.iths.worldfirstwebshop.webshop.storage.Cart;
 import se.iths.worldfirstwebshop.webshop.storage.Inventory;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
 
-@WithMockUser(authorities = "ADMIN")
+@WithMockUser(authorities = ADMIN_AUTHORITY)
 @WebMvcTest(ShopController.class)
 @ContextConfiguration(classes = {SecurityConfig.class, ShopController.class})
 class ShopControllerTest {
@@ -49,10 +52,7 @@ class ShopControllerTest {
     @MockBean
     Publisher publisher;
 
-
-    @Test
-    void shouldReturnStatusCreatedWhenAddingToCart() throws Exception {
-        String json = """
+    String productJson = """
                 {
                 "id":1,
                 "name":"Black tea",
@@ -61,9 +61,12 @@ class ShopControllerTest {
                 }
                 """;
 
+    @Test
+    void shouldReturnStatusCreatedWhenAddingToCart() throws Exception {
+
         mockMvc.perform(MockMvcRequestBuilders.put("/api/shop/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(json)
+                        .content(productJson)
                         .param("amount", "1"))
                 .andExpect(status().isCreated());
 
@@ -72,18 +75,10 @@ class ShopControllerTest {
 
     @Test
     void shouldReturnStatusCreatedWhenRemovingFromCart() throws Exception {
-        String json = """
-                {
-                "id":1,
-                "name":"Black tea",
-                "price":59,
-                "isbn":"100"
-                }
-                """;
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/shop/remove")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(json)
+                        .content(productJson)
                         .param("amount", "1"))
                 .andExpect(status().isCreated());
 
