@@ -6,6 +6,7 @@ public enum Role implements GrantedAuthority {
     USER, ADMIN;
 
     public static final String ADMIN_AUTHORITY = "ADMIN";
+    public static final String USER_AUTHORITY = "USER";
 
     @Override
     public String getAuthority() {

@@ -7,7 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
+
+import static se.iths.worldfirstwebshop.webshop.security.Role.*;
 
 @Configuration
 public class SecurityConfig {
@@ -39,8 +40,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers("/mainSite").permitAll()
-                .requestMatchers("/showProducts").authenticated()
-                .requestMatchers("/showInventory").authenticated()
+                .requestMatchers("/showCart").permitAll()
+                .requestMatchers("/showInventory").permitAll()
+                .requestMatchers("/addToCart").permitAll()
+                .requestMatchers("/showCartForm").permitAll()
+                .requestMatchers("/showProductForm").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/showAddToInventoryForm").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/showProducts").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/checkout").hasAnyAuthority(ADMIN_AUTHORITY, USER_AUTHORITY)
                 .anyRequest().denyAll()
                 .and()
                 .formLogin()
