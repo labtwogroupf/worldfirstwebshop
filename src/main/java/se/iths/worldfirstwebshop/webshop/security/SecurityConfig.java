@@ -7,16 +7,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
 
 @Configuration
 public class SecurityConfig {
 
-    //TODO Configure and fix the issue below.
-    /*** This configuration is incorrect but is afaik working as expected other than one bug. When you log in with the
-     * wrong user in the webapp from Chrome guest mode you have to restart Chrome in order to be able to log in
-     * with the correct user. But it works as expected when you log in with the correct user from start.
-     */
 
     @Bean
     @Order(1)
@@ -25,6 +20,7 @@ public class SecurityConfig {
                 .securityMatcher("/api/**")
                 .csrf().disable()
                 .authorizeHttpRequests()
+
                 .requestMatchers("/api/inventory/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/products/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/shop/**").hasAnyAuthority("ADMIN")
@@ -38,7 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+        return httpSecurity
                 .csrf()
                 .ignoringRequestMatchers("/register")
                 .and()
@@ -49,10 +45,9 @@ public class SecurityConfig {
                 .requestMatchers("/showInventory").authenticated()
                 .anyRequest().denyAll()
                 .and()
-                .formLogin(); //used by Browser
-        //  .httpBasic(); //used by Insomnia
-
-        return httpSecurity.build();
+                .formLogin()
+                .and()
+                .build();
     }
 
     @Bean

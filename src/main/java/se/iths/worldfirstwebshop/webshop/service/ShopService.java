@@ -1,8 +1,8 @@
 package se.iths.worldfirstwebshop.webshop.service;
 
-
 import org.springframework.stereotype.Service;
-import se.iths.worldfirstwebshop.webshop.access.Shop;
+import se.iths.worldfirstwebshop.webshop.product.Product;
+import se.iths.worldfirstwebshop.webshop.shop.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
@@ -21,7 +21,6 @@ public class ShopService {
         this.shop = new Shop(mapper.mapToInventory(inventoryRepo.findAll()));
         this.mapper = mapper;
         this.inventoryRepo = inventoryRepo;
-
     }
 
     public void addToCart(ProductDto product, int amount) {
@@ -30,6 +29,10 @@ public class ShopService {
 
     public void removeFromCart(ProductDto product) {
         shop.removeFromCart(shop.getInventory().getProductInInventory(mapper.mapToProduct(product)));
+    }
+
+    public Map<Product,Integer> getCart() {
+        return shop.getCart().getProducts();
     }
 
     public void checkout() {
@@ -46,7 +49,7 @@ public class ShopService {
 
         inventoryRepo.deleteAll();
         inventoryRepo.saveAll(mapper.getInventoryEntitiesAsLists(updatedInventory));
-
     }
+
 
 }

@@ -16,17 +16,17 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
 
 @WebMvcTest(InventoryController.class)
-@WithMockUser(authorities = "ADMIN")
+@WithMockUser(authorities = ADMIN_AUTHORITY)
 @ContextConfiguration(classes = {SecurityConfig.class, InventoryController.class})
-public class InventoryControllerTest {
+class InventoryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private InventoryController inventoryController;
-    @Autowired
     @MockBean
     private ProductRepository productRepository;
     @MockBean
