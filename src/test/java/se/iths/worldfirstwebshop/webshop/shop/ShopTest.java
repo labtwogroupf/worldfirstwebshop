@@ -24,11 +24,7 @@ class ShopTest {
 
         assertThat(leftInStock).isEqualTo(3);
     }
-
-
-
-
-
+    
     @Test
     void remove2FromStockRemovesCorrectAmountAndReturns1(){
         var product = new Product("test", BigDecimal.ONE, "1");
@@ -37,14 +33,9 @@ class ShopTest {
         cart.remove(product, 2);
 
         var leftInStock = cart.getAmountInCart(product);
-
-
+        
         assertThat(leftInStock).isEqualTo(1);
-
-
-
     }
-
 
     @Test
     void add2Than2ToShouldReturn4() {
@@ -68,11 +59,7 @@ class ShopTest {
         shop.checkout();
 
         assertThat(inventory.getNrOfProductsInStock(product)).isEqualTo(2);
-
-    }
-
-
-
+}
 
     @Test
     void remove4thanRemove2ShouldReturn3(){
@@ -87,5 +74,4 @@ class ShopTest {
         assertThat(leftInInventory).isEqualTo(3);
 
     }
-
 }

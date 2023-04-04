@@ -20,7 +20,6 @@ class InventoryTest {
         var addedProduct = inventory.contains(testProduct);
 
         assertThat(addedProduct).isTrue();
-
     }
 
     @Test
@@ -29,13 +28,10 @@ class InventoryTest {
         inventory.add(product, 10);
 
         assertThat(inventory.contains(new Product("Svart Te", BigDecimal.ONE, "12345"))).isFalse();
-
     }
 
     @Test
     void removingMoreThanIsIn() {
 
     }
-
 }
-

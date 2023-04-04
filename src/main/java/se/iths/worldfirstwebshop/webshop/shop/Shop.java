@@ -35,7 +35,6 @@ public class Shop {
 
     public void removeFromCart(Product product) {
         cart.remove(product, -1);
-
     }
 
     private boolean checkIfInStock(Product product, int amount) {
