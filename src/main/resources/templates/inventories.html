@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <style>
+    * {
+      font-family: Arial,sans-serif;
+    }
+    h1 {
+      color:darkgreen;
+      font-size: medium;
+    }
+    .title_box{
+      border:5px outset darkgreen;
+      border-radius: 4px;
+      width: fit-content;
+      padding: 0.5em;
+    }
+
+  </style>
   <meta charset="UTF-8">
   <title>Inventory</title>
 </head>
 <body>
-<div th:insert="~{fragments::menu1}"></div>
 
+<div th:insert="~{fragments::menu1}"></div>
+<div class="title_box">
 <table>
   <tr th:each="invens: ${allInventories}">
     <td th:text="${invens.getProduct().getName()}"></td>
@@ -14,10 +31,11 @@
     <td th:text="${invens.getAmount() + 'st'}"></td>
   </tr>
 </table>
-<div th:insert="~{fragments::footer3}"></div>
-<div th:insert="~{fragments::footer1}"></div>
+</div>
+<div th:insert="~{fragments::addToInv}"></div>
+<div th:insert="~{fragments::products}"></div>
 </body>
 <body>
-<div th:insert="~{fragments::mainFooter}"></div>
+<div th:insert="~{fragments::mainSite}"></div>
 </body>
 </html>

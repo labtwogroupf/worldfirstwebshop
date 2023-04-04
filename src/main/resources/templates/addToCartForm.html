@@ -18,44 +18,47 @@
 
     </style>
     <meta charset="UTF-8">
-    <title>Add to inventory</title>
+    <title>Add to Cart</title>
 </head>
 <body>
-<div th:insert="~{fragments::menu4}"></div>
+<div th:insert="~{fragments::menu5}"></div>
 <div class="title_box">
-<table>
-    <tr th:each="prods: ${allProducts}">
-        <td th:text="${prods.getId()}"></td>
-        <td th:text="${prods.getName()}"></td>
-        <td th:text="${prods.getPrice() + 'kr'}"></td>
-    </tr>
-</table>
+    <table>
+        <tr th:each="invens: ${allInventories}">
+            <td th:text="${'ID: ' + invens.getProduct().getId()}"></td>
+            <td th:text="${invens.getProduct().getName()}"></td>
+            <td th:text="${invens.getProduct().getPrice() + 'kr'}"></td>
+            <td th:text="${'Amount: ' + invens.getAmount() + 'st'}"></td>
+        </tr>
+    </table>
 </div>
+
+<div th:fragment="content">
+
+
     <div class="container mt-3 mb-3">
 
-            <form th:action="@{/addProductToInventory}" action="#" method="post" th:object="${product}">
+        <form th:action="@{/addToCart}" action="#" method="post" th:object="${product}">
 
-                <div class="mb-3">
-                    <h1>
+            <div class="mb-3">
+                <h1>
                     <label for="productIdInput">Product Id</label>
                     <input th:field="*{id}" type="text" class="form-control" id="productIdInput" aria-describedby="productIdHelp" placeholder="Enter product id">
-                    </h1>
-                </div>
+                </h1>
+            </div>
 
-                <div class="mb-3">
-                    <h1>
+            <div class="mb-3">
+                <h1>
                     <label for="amountInput">Amount</label>
                     <input th:object="${inventory}" th:field="*{amount}" type="text" class="form-control" id="amountInput" aria-describedby="amountHelp" placeholder="Enter amount to add">
-                    </h1>
-                </div>
+                </h1>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Add to inventory</button>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
 
-                <div th:insert="~{fragments::mainSite}"></div>
+            <div th:insert="~{fragments::mainSite}"></div>
         </form>
-
-
     </div>
-
+</div>
 </body>
 </html>

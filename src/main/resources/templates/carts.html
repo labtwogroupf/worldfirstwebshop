@@ -21,22 +21,22 @@
     <title>Products</title>
 </head>
 <body>
-<div th:insert="~{fragments::menu}"></div>
+<div th:insert="~{fragments::menu6}"></div>
 <div class="title_box">
-<table>
-    <tr th:each="prods: ${allProducts}">
-        <td th:text="${prods.getId()}"></td>
-        <td th:text="${prods.getName()}"></td>
-        <td th:text="${prods.getPrice() + 'kr'}"></td>
-        <td th:text="${'ISBN: ' + prods.getIsbn()}"></td>
-    </tr>
-</table>
+    <table>
+        <tr th:each="carts: ${cart}">
+            <td th:text="${carts.getKey().getName()}"></td>
+            <td th:text="${carts.getValue()}"></td>
+        </tr>
+    </table>
 </div>
-<div th:insert="~{fragments::addProducts}"></div>
-<div th:insert="~{fragments::addToInv}"></div>
-<div th:insert="~{fragments::inventory}"></div>
 </body>
 <body>
+<div th:insert="~{fragments::addToCart}"></div>
 <div th:insert="~{fragments::mainSite}"></div>
+<form th:action="@{/checkout}" action="#" method="post">
+<button type="submit" class="btn btn-secondary btn-lg btn-block">Click to accept order</button>
+</form>
+
 </body>
 </html>
