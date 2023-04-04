@@ -3,18 +3,27 @@ package se.iths.worldfirstwebshop.webshop.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.iths.worldfirstwebshop.webshop.access.Shop;
+import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
+import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
+import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/shop")
 public class ShopController {
 
+    Mapper mapper;
     ShopService service;
     Publisher publisher;
 
-    public ShopController(ShopService service, Publisher publisher) {
+    public ShopController(ShopService service, Publisher publisher, Mapper mapper) {
+        this.mapper = mapper;
         this.service = service;
         this.publisher = publisher;
     }
@@ -35,6 +44,9 @@ public class ShopController {
     ResponseEntity checkout() {
         service.checkout();
         return ResponseEntity.status(HttpStatus.OK).build();
-
+    }
+    @GetMapping("/getAll")
+    List<Map.Entry<Product, Integer>> getCart(){
+        return service.getCart();
     }
 }

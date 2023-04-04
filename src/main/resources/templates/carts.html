@@ -24,14 +24,19 @@
 <div th:insert="~{fragments::menu6}"></div>
 <div class="title_box">
     <table>
-        <tr th:each="cart: ${cart}">
-            <td th:text="${cart.getKey().getName()}"></td>
-            <td th:text="${cart.getKey().getPrice()}"></td>
+        <tr th:each="carts: ${cart}">
+            <td th:text="${carts.getKey().getName()}"></td>
+            <td th:text="${carts.getValue()}"></td>
         </tr>
     </table>
 </div>
 </body>
 <body>
+<div th:insert="~{fragments::addToCart}"></div>
 <div th:insert="~{fragments::mainSite}"></div>
+<form th:action="@{/checkout}" action="#" method="post">
+<button type="submit" class="btn btn-secondary btn-lg btn-block">Click to accept order</button>
+</form>
+
 </body>
 </html>

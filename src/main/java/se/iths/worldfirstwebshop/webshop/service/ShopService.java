@@ -10,8 +10,10 @@ import se.iths.worldfirstwebshop.webshop.access.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
+import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,10 @@ public class ShopService {
         shop.checkout();
         updateInventoryDatabase();
     }
+    public List<Map.Entry<Product, Integer>> getCart(){
+        return this.shop.getCart().getProducts().entrySet().stream().toList();
+    }
+
 
     private void updateInventoryDatabase() {
         var updatedInventory = shop.getInventory()
