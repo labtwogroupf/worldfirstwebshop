@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
-import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
+import se.iths.worldfirstwebshop.webshop.messagequeue.Publisher;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 import se.iths.worldfirstwebshop.webshop.service.InventoryService;
