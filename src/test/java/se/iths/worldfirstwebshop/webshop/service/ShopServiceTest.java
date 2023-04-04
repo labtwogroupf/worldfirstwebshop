@@ -40,16 +40,6 @@ class ShopServiceTest {
         shop.addToCart(product,1);
         verify(shop).addToCart(product,1);
     }
-
-    @Test
-    void removeFromCart() {
-        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100",1L );
-        ProductDto productDto = mapper.mapToDto(product);
-        shopService.addToCart(productDto, 1);
-        shop.removeFromCart(product);
-        verify(shop).removeFromCart(product);
-    }
-
     @Test
     void checkout() {
 
@@ -61,10 +51,27 @@ class ShopServiceTest {
         shop.getInventory().add(product, 3);
         shop.addToCart(product, 2);
 
-        //shopService.checkout();
+        shopService.checkout();
 
         int actual = shop.getInventory().getInventory().get(product);
 
         assertEquals(1,actual);
     }
+
+
+
+    @Test
+    void removeFromCart() {
+        Product product = new Product("Black tea", BigDecimal.valueOf(59), "100",1L );
+        ProductDto productDto = mapper.mapToDto(product);
+        shopService.addToCart(productDto, 1);
+        shop.removeFromCart(product);
+        verify(shop).removeFromCart(product);
+    }
+
+
+
+
+
 }
+
