@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserCredentialsController {
 
-    public static Integer ZERO = 0;
-
     private PasswordEncoder encoder;
     private UserCredentialsRepository repository;
 
@@ -33,6 +31,4 @@ public class UserCredentialsController {
         repository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
-    //Add more endpoints for changing password, deleting account, set roles and other things
 }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
-import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
+import se.iths.worldfirstwebshop.webshop.messagequeue.Publisher;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
 
 @RestController
@@ -20,19 +20,19 @@ public class ShopController {
     }
 
     @PutMapping("/add")
-    ResponseEntity addToCart(@RequestBody ProductDto product, @RequestParam int amount) {
+    ResponseEntity<Void> addToCart(@RequestBody ProductDto product, @RequestParam int amount) {
         publisher.addToQueue(product, amount);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/remove")
-    ResponseEntity removeFromCart(@RequestBody ProductDto product) {
+    ResponseEntity<Void> removeFromCart(@RequestBody ProductDto product) {
         service.removeFromCart(product);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/checkout")
-    ResponseEntity checkout() {
+    ResponseEntity<Void> checkout() {
         service.checkout();
         return ResponseEntity.status(HttpStatus.OK).build();
 
