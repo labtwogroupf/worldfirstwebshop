@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import se.iths.worldfirstwebshop.webshop.access.Shop;
+import se.iths.worldfirstwebshop.webshop.shop.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.security.SecurityConfig;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;

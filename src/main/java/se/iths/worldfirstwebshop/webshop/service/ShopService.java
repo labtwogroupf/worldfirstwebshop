@@ -2,7 +2,7 @@ package se.iths.worldfirstwebshop.webshop.service;
 
 
 import org.springframework.stereotype.Service;
-import se.iths.worldfirstwebshop.webshop.access.Shop;
+import se.iths.worldfirstwebshop.webshop.shop.Shop;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.product.Product;

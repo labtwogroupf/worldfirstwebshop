@@ -1,4 +1,4 @@
-package se.iths.worldfirstwebshop.webshop.access;
+package se.iths.worldfirstwebshop.webshop.shop;
 import org.junit.jupiter.api.Test;
 import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.storage.Cart;
