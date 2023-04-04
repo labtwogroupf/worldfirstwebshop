@@ -5,7 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
+import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/shop")
@@ -36,5 +40,9 @@ public class ShopController {
         service.checkout();
         return ResponseEntity.status(HttpStatus.OK).build();
 
+    }
+    @GetMapping("/getAll")
+    List<Map.Entry<Product, Integer>> getCart(){
+        return service.getCart();
     }
 }

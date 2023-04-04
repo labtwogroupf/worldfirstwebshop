@@ -17,6 +17,8 @@ services:
   webshop:
     depends_on:
       - database
+      - rabbitMQ
+      - mongoDB
     container_name: wfws
     build:
       context: .
@@ -27,6 +29,21 @@ services:
       DB_URL: database:3306/wfws
       DB_USER: wfws
       DB_PASS: password
+  rabbitMQ:
+    image: 'rabbitmq:latest'
+    restart: unless-stopped
+    environment:
+      host: localhost
+      username: guest
+      password: guest
+    ports:
+      - "5672:5672"
+  mongoDB:
+    image: mongo:latest
+    restart: unless-stopped
+    hostname: localhost
+    ports:
+      - "27017:27017"
 volumes:
   db:
 

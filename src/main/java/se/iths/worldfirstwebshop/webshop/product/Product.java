@@ -48,4 +48,10 @@ public class Product {
     public boolean matchingIsbn(String isbn) {
         return this.isbn.equals(isbn);
     }
+
+    @Override
+    public String toString() {
+        return "Product='" + name + '\'' +
+                '}';
+    }
 }

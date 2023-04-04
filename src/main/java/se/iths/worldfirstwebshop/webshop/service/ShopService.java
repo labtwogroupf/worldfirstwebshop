@@ -1,17 +1,14 @@
 package se.iths.worldfirstwebshop.webshop.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import se.iths.worldfirstwebshop.webshop.access.Shop;
-import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
+import se.iths.worldfirstwebshop.webshop.product.Product;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -52,6 +49,10 @@ public class ShopService {
         inventoryRepo.deleteAll();
         inventoryRepo.saveAll(mapper.getInventoryEntitiesAsLists(updatedInventory));
 
+    }
+
+    public List<Map.Entry<Product, Integer>> getCart(){
+        return this.shop.getCart().getProducts().entrySet().stream().toList();
     }
 
 }
