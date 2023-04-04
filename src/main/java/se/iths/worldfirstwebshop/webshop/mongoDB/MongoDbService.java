@@ -4,17 +4,18 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Service
-public class MongoRepo {
+public class MongoDbService {
 
     ProductsSoldRepository productsSoldRepo;
 
-    public MongoRepo(ProductsSoldRepository productsSoldRepo) {
+    public MongoDbService(ProductsSoldRepository productsSoldRepo) {
         this.productsSoldRepo = productsSoldRepo;
     }
 
@@ -33,6 +34,9 @@ public class MongoRepo {
                 .stream()
                 .filter(getSameProduct(productDto))
                 .findFirst();
+    }
+    public List<ProductsSold> getAll(){
+        return productsSoldRepo.findAll();
     }
 
     @NotNull
@@ -53,8 +57,4 @@ public class MongoRepo {
         return p -> p.getProduct().isSame(productDto);
     }
 
-    @NotNull
-    private static Function<ProductsSold, Integer> mapToAmountSold() {
-        return p -> p.productsSold;
-    }
 }
