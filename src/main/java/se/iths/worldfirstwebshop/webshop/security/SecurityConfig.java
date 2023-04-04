@@ -38,21 +38,24 @@ public class SecurityConfig {
                 .ignoringRequestMatchers("/register")
                 .and()
                 .authorizeHttpRequests()
+                .requestMatchers("/error").permitAll()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers("/mainSite").permitAll()
                 .requestMatchers("/showCart").permitAll()
                 .requestMatchers("/showInventory").permitAll()
                 .requestMatchers("/addToCart").permitAll()
                 .requestMatchers("/showCartForm").permitAll()
+                .requestMatchers("/checkout").authenticated()
                 .requestMatchers("/showProductForm").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/showAddToInventoryForm").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/showProducts").hasAuthority(ADMIN_AUTHORITY)
-                .requestMatchers("/checkout").hasAnyAuthority(ADMIN_AUTHORITY, USER_AUTHORITY)
                 .anyRequest().denyAll()
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("/mainSite")
                 .and()
                 .build();
+
     }
 
     @Bean
