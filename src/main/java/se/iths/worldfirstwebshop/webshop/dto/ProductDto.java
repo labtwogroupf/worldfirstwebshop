@@ -61,4 +61,7 @@ public class ProductDto {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
+    public boolean isSame(ProductDto productDto){
+        return this.isbn.equals(productDto.isbn);
+    }
 }

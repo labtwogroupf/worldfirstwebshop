@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/inventory/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/products/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/shop/**").hasAnyAuthority("ADMIN")
+                .requestMatchers(("/api/sold")).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
