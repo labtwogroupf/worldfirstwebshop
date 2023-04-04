@@ -13,7 +13,6 @@
     <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>worldfirstwebshop</name>
-    <url>http://WorldFirstWebShop.org</url>
     <description>worldfirstwebshop</description>
     <properties>
         <java.version>19</java.version>
@@ -77,6 +76,10 @@
             <artifactId>annotations</artifactId>
             <version>24.0.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
     </dependencies>
 
