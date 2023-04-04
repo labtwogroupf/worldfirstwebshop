@@ -7,6 +7,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import se.iths.worldfirstwebshop.webshop.messagequeue.Publisher;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 import se.iths.worldfirstwebshop.webshop.security.SecurityConfig;
@@ -37,11 +38,15 @@ class InventoryControllerTest {
     private ShopController shopController;
     @MockBean
     InventoryRepository inventoryRepository;
+    @MockBean
+    Publisher publisher;
+    @MockBean
+    WebController webController;
 
 
     @Test
     void removingFromStockShouldReturn200ok() throws Exception {
-        mockMvc.perform(put("/api/inventory/subtract/{id}", 1L)//.with(user("user"))
+        mockMvc.perform(put("/api/inventory/subtract/{id}", 1L)
                         .param("amount", String.valueOf(10)))
                 .andExpect(status().isOk());
 

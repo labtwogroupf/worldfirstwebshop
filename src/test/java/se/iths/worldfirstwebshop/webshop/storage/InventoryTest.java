@@ -29,9 +29,4 @@ class InventoryTest {
 
         assertThat(inventory.contains(new Product("Svart Te", BigDecimal.ONE, "12345"))).isFalse();
     }
-
-    @Test
-    void removingMoreThanIsIn() {
-
-    }
 }
