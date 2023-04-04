@@ -1,13 +1,9 @@
 package se.iths.worldfirstwebshop.webshop.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.context.annotation.Bean;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import se.iths.worldfirstwebshop.webshop.access.Shop;
-import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.mapper.Mapper;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
@@ -16,18 +12,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ShopService {
 
-    Shop shop;
-    Mapper mapper;
-    InventoryRepository inventoryRepo;
+    private final Shop shop;
+    private final Mapper mapper;
+    private final InventoryRepository inventoryRepo;
 
-    public ShopService(Mapper mapper, InventoryRepository inventoryRepo) {
-        this.shop = new Shop(mapper.mapToInventory(inventoryRepo.findAll()));
-        this.mapper = mapper;
-        this.inventoryRepo = inventoryRepo;
-
-    }
+//    public ShopService(Mapper mapper, InventoryRepository inventoryRepo) {
+//        this.shop = new Shop(mapper.mapToInventory(inventoryRepo.findAll()));
+//        this.mapper = mapper;
+//        this.inventoryRepo = inventoryRepo;
+//
+//    }
 
     public void addToCart(ProductDto product, int amount) {
         shop.addToCart(shop.getInventory().getProductInInventory(mapper.mapToProduct(product)), amount);

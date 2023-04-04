@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="WorldfirstwebshopApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <module name="worldfirstwebshop" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="se.iths.worldfirstwebshop.WorldfirstwebshopApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
