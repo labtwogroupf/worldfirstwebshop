@@ -5,14 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import se.iths.worldfirstwebshop.webshop.dto.InventoryDto;
 import se.iths.worldfirstwebshop.webshop.dto.ProductDto;
 import se.iths.worldfirstwebshop.webshop.messageQueue.Publisher;
 import se.iths.worldfirstwebshop.webshop.repository.InventoryRepository;
 import se.iths.worldfirstwebshop.webshop.repository.ProductRepository;
 import se.iths.worldfirstwebshop.webshop.service.InventoryService;
-import se.iths.worldfirstwebshop.webshop.service.ProductService;
 import se.iths.worldfirstwebshop.webshop.service.ShopService;
 
 
@@ -20,27 +18,25 @@ import se.iths.worldfirstwebshop.webshop.service.ShopService;
 public class WebController {
 
 
-    private final ShopController shopController;
+
     private final Publisher publisher;
     private final InventoryService inventoryService;
-    private final ProductService productService;
+
     private final ShopService shopService;
-    private final InventoryController inventoryController;
+
     private final ProductController productController;
     private final ProductRepository productRepository;
     private final InventoryRepository inventoryRepository;
 
-    public WebController(ShopController shopController, Publisher publisher, InventoryService inventoryService,
-                         ProductService productService,
-                         ShopService shopService, InventoryController inventoryController,
-                         ProductController productController,
+    public WebController(Publisher publisher, InventoryService inventoryService,
+                         ShopService shopService, ProductController productController,
                          ProductRepository repo, InventoryRepository inventoryRepository) {
-        this.shopController = shopController;
+
         this.publisher = publisher;
         this.inventoryService = inventoryService;
-        this.productService = productService;
+
         this.shopService = shopService;
-        this.inventoryController = inventoryController;
+
         this.productController = productController;
         this.productRepository = repo;
         this.inventoryRepository = inventoryRepository;
@@ -118,7 +114,7 @@ public class WebController {
 
     @PostMapping("/checkout")
     String checkout(){
-        if(shopService.getCart().isEmpty()){
+        if(!shopService.getCart().isEmpty()){
             return "carts";
         }
         shopService.checkout();
