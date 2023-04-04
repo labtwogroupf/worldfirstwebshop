@@ -11,10 +11,10 @@ import se.iths.worldfirstwebshop.webshop.security.UserCredentialsRepository;
 import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN;
 
 @SpringBootApplication
-public class WorldFirstWebShopApplication {
+public class WorldfirstwebshopApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WorldFirstWebShopApplication.class, args);
+        SpringApplication.run(WorldfirstwebshopApplication.class, args);
     }
 
 

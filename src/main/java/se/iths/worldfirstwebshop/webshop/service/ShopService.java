@@ -32,9 +32,7 @@ public class ShopService {
         shop.removeFromCart(shop.getInventory().getProductInInventory(mapper.mapToProduct(product)));
     }
 
-    public Map<Product,Integer> getCart() {
-        return shop.getCart().getProducts();
-    }
+
 
     public void checkout() {
         shop.checkout();
