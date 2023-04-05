@@ -8,12 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-
-import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN;
-import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
-
 import static se.iths.worldfirstwebshop.webshop.security.Role.*;
-
 
 @Configuration
 public class SecurityConfig {
@@ -28,8 +23,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/inventory/**").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/api/products/**").hasAuthority(ADMIN_AUTHORITY)
-                .requestMatchers("/api/shop/**").hasAuthority(ADMIN_AUTHORITY)
-                .requestMatchers("/api/sold").hasAnyAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/api/shop/checkout").authenticated()
+                .requestMatchers("/api/shop/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
@@ -52,6 +47,8 @@ public class SecurityConfig {
                 .requestMatchers("/addToCart").permitAll()
                 .requestMatchers("/showCartForm").permitAll()
                 .requestMatchers("/checkout").authenticated()
+                .requestMatchers("/addProduct").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/addProductToInventory").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/showProductForm").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/showAddToInventoryForm").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/showProducts").hasAuthority(ADMIN_AUTHORITY)
@@ -61,7 +58,6 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/mainSite")
                 .and()
                 .build();
-
     }
 
     @Bean
