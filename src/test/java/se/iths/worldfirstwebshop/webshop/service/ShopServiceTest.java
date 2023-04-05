@@ -49,7 +49,7 @@ class ShopServiceTest {
         when(inventoryRepo.findAll()).thenReturn(currentInventory);
 
         shop.getInventory().add(product, 0);
-        shop.addToCart(product, 2);
+        shop.addToCart(product, 1);
 
         shopService.checkout();
 
