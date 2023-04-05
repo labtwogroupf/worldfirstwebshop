@@ -1,8 +1,9 @@
 package se.iths.worldfirstwebshop.webshop.shop;
 import org.junit.jupiter.api.Test;
-import se.iths.worldfirstwebshop.webshop.product.Product;
-import se.iths.worldfirstwebshop.webshop.storage.Cart;
-import se.iths.worldfirstwebshop.webshop.storage.Inventory;
+import se.iths.worldfirstwebshop.webshop.domain.product.Product;
+import se.iths.worldfirstwebshop.webshop.domain.inventory.Cart;
+import se.iths.worldfirstwebshop.webshop.domain.inventory.Inventory;
+import se.iths.worldfirstwebshop.webshop.domain.shop.Shop;
 
 import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
