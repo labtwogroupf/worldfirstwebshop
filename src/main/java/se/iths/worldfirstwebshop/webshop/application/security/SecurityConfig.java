@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static se.iths.worldfirstwebshop.webshop.application.security.Role.ADMIN_AUTHORITY;
+
 @Configuration
 public class SecurityConfig {
 
@@ -19,8 +21,8 @@ public class SecurityConfig {
                 .securityMatcher("/api/**")
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/inventory/**").hasAuthority(Role.ADMIN_AUTHORITY)
-                .requestMatchers("/api/products/**").hasAuthority(Role.ADMIN_AUTHORITY)
+                .requestMatchers("/api/inventory/**").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/api/products/**").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/api/shop/checkout").authenticated()
                 .requestMatchers("/api/shop/**").permitAll()
                 .anyRequest().authenticated()
@@ -45,18 +47,17 @@ public class SecurityConfig {
                 .requestMatchers("/addToCart").permitAll()
                 .requestMatchers("/showCartForm").permitAll()
                 .requestMatchers("/checkout").authenticated()
-                .requestMatchers("/addProduct").hasAuthority(Role.ADMIN_AUTHORITY)
-                .requestMatchers("/addProductToInventory").hasAuthority(Role.ADMIN_AUTHORITY)
-                .requestMatchers("/showProductForm").hasAuthority(Role.ADMIN_AUTHORITY)
-                .requestMatchers("/showAddToInventoryForm").hasAuthority(Role.ADMIN_AUTHORITY)
-                .requestMatchers("/showProducts").hasAuthority(Role.ADMIN_AUTHORITY)
+                .requestMatchers("/addProduct").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/addProductToInventory").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/showProductForm").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/showAddToInventoryForm").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/showProducts").hasAuthority(ADMIN_AUTHORITY)
                 .anyRequest().denyAll()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/mainSite")
                 .and()
                 .build();
-
     }
 
     @Bean
