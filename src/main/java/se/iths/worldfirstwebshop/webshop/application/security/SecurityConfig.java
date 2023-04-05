@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static se.iths.worldfirstwebshop.webshop.application.security.Role.ADMIN_AUTHORITY;
+import static se.iths.worldfirstwebshop.webshop.application.security.Role.*;
 
 @Configuration
 public class SecurityConfig {
