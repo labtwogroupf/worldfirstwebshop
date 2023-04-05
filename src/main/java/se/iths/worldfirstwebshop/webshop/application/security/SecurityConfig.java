@@ -13,7 +13,6 @@ import static se.iths.worldfirstwebshop.webshop.application.security.Role.*;
 @Configuration
 public class SecurityConfig {
 
-
     @Bean
     @Order(1)
     public SecurityFilterChain filterChainForRestApi(HttpSecurity httpSecurity) throws Exception {
