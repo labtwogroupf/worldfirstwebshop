@@ -8,7 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
+import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN;
+import static se.iths.worldfirstwebshop.webshop.security.Role.ADMIN_AUTHORITY;
+
 import static se.iths.worldfirstwebshop.webshop.security.Role.*;
+
 
 @Configuration
 public class SecurityConfig {
@@ -24,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/inventory/**").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/api/products/**").hasAuthority(ADMIN_AUTHORITY)
                 .requestMatchers("/api/shop/**").hasAuthority(ADMIN_AUTHORITY)
+                .requestMatchers("/api/sold").hasAnyAuthority(ADMIN_AUTHORITY)
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
