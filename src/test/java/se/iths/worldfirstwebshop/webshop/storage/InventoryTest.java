@@ -1,7 +1,8 @@
 package se.iths.worldfirstwebshop.webshop.storage;
 
 import org.junit.jupiter.api.Test;
-import se.iths.worldfirstwebshop.webshop.product.Product;
+import se.iths.worldfirstwebshop.webshop.domain.inventory.Inventory;
+import se.iths.worldfirstwebshop.webshop.domain.product.Product;
 
 import java.math.BigDecimal;
 
