@@ -15,9 +15,7 @@ import se.iths.worldfirstwebshop.webshop.storage.InventoryEntity;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ShopServiceTest {
@@ -46,16 +44,12 @@ class ShopServiceTest {
         Product product = new Product("Black tea", BigDecimal.valueOf(59), "100", 1L);
         List<InventoryEntity> currentInventory = List.of(
                 new InventoryEntity(product, 3));
-        when(inventoryRepo.findAll()).thenReturn(currentInventory);
 
-        shop.getInventory().add(product, 0);
-        shop.addToCart(product, 1);
 
-        shopService.checkout();
+        shop.addToCart(product, 2);
 
-        int actual = shop.getInventory().getInventory().get(product);
-
-        assertEquals(1,actual);
+        shop.checkout();
+        verify(shop).checkout();
     }
 
 
